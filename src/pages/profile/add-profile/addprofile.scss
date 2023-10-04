@@ -1,0 +1,35 @@
+@import "../../../assets/scss/helper/variables";
+
+.add-profile {
+  .profile-details {
+    .details-box {
+      .input-border {
+        .expirence {
+          height: 17px;
+        }
+      }
+
+      .common-btn {
+        margin-top: 23px;
+        text-align: start !important;
+
+        .btn {
+          background-color: $light-primary;
+
+          &:hover {
+            background-color: transparent;
+            color: $light-primary;
+            border-color: $light-primary;
+          }
+        }
+      }
+    }
+
+    .bottom-btn {
+      margin-top: 25px;
+      .common-btn {
+        text-align: end !important;
+      }
+    }
+  }
+}

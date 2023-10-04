@@ -1,0 +1,396 @@
+@import "../../../assets/scss/helper/variables";
+
+.profile-details {
+  .box {
+    .title {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      @media (max-width: 767px) {
+        & {
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
+      .top-bar {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $white;
+        padding: 10px 20px;
+        border: 1px solid $grey-200;
+        box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
+          0px 1px 2px rgba(16, 24, 40, 0.06);
+        margin-bottom: 20px;
+        border-radius: 5px;
+        @media (max-width: 767px) {
+          & {
+            margin-top: 20px;
+          }
+        }
+
+        button {
+          background: transparent;
+          border: none;
+          display: flex;
+          gap: 12px;
+        }
+
+        img {
+          width: 22px;
+        }
+
+        span {
+          margin: 0px;
+          color: $grey-700;
+          font-family: "Inter";
+          font-weight: 500;
+        }
+
+        label {
+          padding: 0;
+
+          input[type="checkbox"] {
+            position: relative;
+            top: inherit;
+            transform: inherit;
+
+            &:after {
+              top: -2px;
+              left: -2px;
+              width: 15px;
+              height: 15px;
+            }
+          }
+        }
+
+        .custom {
+          margin: 0px;
+        }
+
+        .css-1u9des2-indicatorSeparator {
+          background-color: transparent;
+        }
+      }
+    }
+
+    .item {
+      background-color: #ffffff;
+      border: 1px solid #eaecf0;
+      box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
+        0px 1px 2px rgba(16, 24, 40, 0.06);
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 20px;
+      .edit-image {
+        text-align: end;
+        // img{
+        //   width: 20px;
+        //   height: auto;
+        // }
+      }
+
+      .details-content {
+        ul {
+          padding: 0px;
+          margin: 0px;
+          list-style-type: none;
+
+          li {
+            font-size: 14px;
+            color: $grey-900;
+            font-family: "Inter";
+            font-weight: 400;
+            margin-bottom: 10px;
+
+            &:last-child {
+              margin-bottom: 0px;
+            }
+
+            span {
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+      .applied {
+        padding: 20px 0px 10px;
+        border-top: 2px solid $grey-200;
+        margin-top: 15px;
+
+        ul {
+          padding: 0px;
+          margin: 0px;
+          list-style-type: none;
+          display: flex;
+          align-items: center;
+          @media (max-width: 576px) {
+            & {
+              flex-direction: column;
+            }
+          }
+
+          li {
+            font-size: 14px;
+            color: $grey-900;
+            font-family: "Inter";
+            font-weight: 400;
+            margin-right: 20px;
+            @media (max-width: 576px) {
+              &:nth-child(even) {
+                display: none;
+              }
+              & {
+                margin-bottom: 10px;
+                &:last-child {
+                  margin-bottom: 0px;
+                }
+              }
+            }
+
+            &:last-child {
+              margin-right: 0px;
+            }
+
+            span {
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+      &.summary {
+        .title {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          h5 {
+            color: $grey-900;
+            font-family: "Inter";
+            font-weight: 500;
+          }
+
+          img {
+            width: 20px;
+            height: auto;
+          }
+        }
+
+        .content {
+          padding: 20px 0px 10px;
+          border-top: 2px solid $grey-200;
+          margin-top: 15px;
+
+          p {
+            color: $grey-900;
+            font-family: "Inter";
+            font-weight: 400;
+          }
+        }
+      }
+
+      &.work {
+        .title {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+
+          h5 {
+            color: $grey-900;
+            font-family: "Inter";
+            font-weight: 500;
+            @media (max-width: 576px) {
+              & {
+                margin-top: 10px;
+              }
+            }
+          }
+
+          .btn {
+            background-color: $light-primary;
+
+            &:hover {
+              background-color: transparent;
+              border-color: $light-primary;
+              color: $light-primary;
+            }
+          }
+        }
+
+        .content {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 20px 0px 10px;
+          border-top: 2px solid $grey-200;
+          margin-top: 15px;
+
+          .left {
+            h4 {
+              color: $grey-900;
+              font-family: "Inter";
+              font-weight: 400;
+
+              span {
+                color: $grey-500;
+              }
+            }
+
+            p {
+              color: $grey-900;
+              font-family: "Inter";
+              font-weight: 400;
+            }
+          }
+
+          .right {
+            img {
+              width: 20px;
+              height: auto;
+              cursor: pointer;
+              margin-right: 30px;
+
+              &:last-child {
+                margin-right: 0px;
+              }
+            }
+          }
+        }
+      }
+
+      &.other {
+        .other-items {
+          padding: 20px 0px 10px;
+          border-top: 2px solid $grey-200;
+          margin-top: 15px;
+
+          .other-details {
+            margin-bottom: 20px;
+
+            h4 {
+              color: $grey-900;
+              font-family: "Inter";
+              font-weight: 500;
+              margin-bottom: 15px;
+            }
+
+            h6 {
+              color: $grey-900;
+              font-family: "Inter";
+              font-weight: 400;
+            }
+          }
+        }
+      }
+
+      &.documents {
+        .box {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 20px 0px 10px;
+          border-top: 2px solid #eaecf0;
+          margin-top: 15px;
+          @media (max-width: 576px) {
+            & {
+              flex-direction: column;
+            }
+          }
+        }
+
+        .left {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          @media (max-width: 576px) {
+            & {
+              margin-bottom: 20px;
+            }
+          }
+
+          .icon {
+            img {
+              width: 50px;
+              height: auto;
+              margin-right: 10px;
+              cursor: pointer;
+            }
+          }
+
+          .text {
+            h6 {
+              color: $grey-900;
+              font-family: "Inter";
+              font-weight: 400;
+              line-height: 25px;
+            }
+          }
+        }
+
+        .right {
+          img {
+            width: 25px;
+            height: auto;
+            margin-right: 30px;
+
+            &:last-child {
+              margin-right: 0px;
+            }
+          }
+        }
+      }
+
+      &.resume {
+        .pdf {
+          padding: 20px 0px 10px;
+          border-top: 2px solid $grey-200;
+          margin-top: 15px;
+        }
+      }
+    }
+
+    .enter {
+      padding: 20px;
+
+      .common-btn {
+        text-align: end;
+        margin-top: 20px;
+
+        .btn {
+          background-color: $light-primary;
+
+          &:hover {
+            background-color: transparent;
+            border-color: $light-primary;
+            color: $light-primary;
+          }
+        }
+      }
+    }
+
+    .sumit {
+      h5 {
+        color: $grey-900;
+        font-weight: 500;
+        font-family: "Inter";
+
+        span {
+          color: $grey-500;
+          font-weight: 400;
+          font-size: 12px;
+        }
+      }
+
+      p {
+        font-family: "Inter";
+        color: $grey-900;
+        font-weight: 400;
+      }
+    }
+  }
+}

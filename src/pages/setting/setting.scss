@@ -1,0 +1,52 @@
+.setting {
+  .common-btn{
+    text-align: end;
+    padding-bottom: 30px;
+  }
+  .table {
+    .global-table {
+      .rdt_TableHeadRow .dKzMcW {
+        display: none;
+      }
+
+      .rdt_TableRow .rdt_TableCell:last-child {
+        justify-content: flex-start;
+      }
+    }
+  }
+  .nav-pills {
+    border-right: 2px solid #d0d5dd;
+    padding-right: 20px;
+    height: 100%;
+    .nav-item {
+      .nav-link {
+        color: #212121;
+        font-size: 14px;
+        font-family: "Inter";
+        font-weight: 500;
+        padding: 16px 20px;
+        border-radius: 16px;
+        &.active {
+          background: #7b61ff;
+          color: #fff;
+          font-weight: 700;
+        }
+      }
+    }
+    @media screen and (max-width: 991px) {
+      .nav-item {
+        .nav-link {
+          border-radius: 10px;
+          padding: 10px 15px;
+        }
+      }
+    }
+    @media screen and (max-width: 767px) {
+      flex-direction: row !important;
+      gap: 10px;
+      padding-right: 0;
+      border-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+}

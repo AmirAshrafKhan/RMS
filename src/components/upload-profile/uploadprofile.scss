@@ -1,0 +1,79 @@
+@import '../../assets/scss/helper/_variables';
+
+.upload-box {
+    text-align: center;
+    position: relative;
+
+    .upload-image {
+        position: relative;
+
+        img {
+            width: 180px;
+            height: auto;
+        }
+    }
+
+    .upload {
+
+        form {
+            position: absolute;
+            top: 40%;
+            left: 70%;
+            transform: translate(-70%, -40%);
+            z-index: 111;
+
+
+            input {
+                opacity: 0;
+                cursor: pointer;
+            }
+        }
+
+        .upload-icon {
+
+            position: absolute;
+            top: 40%;
+            left: 49%;
+            transform: translate(-49%, -40%);
+
+
+            img {
+                width: 50px;
+                height: auto;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .text {
+        margin: 10px 0px 20px;
+
+        h5 {
+            color: $grey-900;
+            font-family: 'Inter';
+        }
+
+        h6 {
+            color: $grey-500;
+            font-family: 'Inter';
+        }
+    }
+
+
+    .upload-btn {
+        .btn {
+            background-color: $primary-600;
+            padding: 8px 50px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-family: 'Inter';
+            font-weight: 600;
+            color: $white;
+
+            img {
+                width: 25px;
+                margin-right: 8px;
+            }
+        }
+    }
+}

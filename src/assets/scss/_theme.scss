@@ -1,0 +1,413 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 50px;
+}
+
+body {
+  font-family: $primary-font;
+  font-weight: 400;
+  background: $theme-color;
+  color: $black;
+  overflow-x: hidden;
+}
+.form-control {
+  &:focus {
+    box-shadow: none !important;
+  }
+}
+textarea {
+  resize: none;
+}
+
+p {
+  margin: 0px;
+}
+
+h1 {
+  font-size: 32px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 25px;
+}
+
+h4 {
+  font-size: 20px;
+}
+
+h5 {
+  font-size: 16px;
+}
+
+h6 {
+  font-size: 14px;
+}
+
+@media (max-width: 767px) {
+  h1 {
+    font-size: 27px;
+  }
+
+  h5 {
+    font-size: 15px;
+  }
+}
+
+// Global Padding Class
+.section-padding {
+  padding: 50px 0;
+}
+
+a {
+  @include transition(all 0.5s);
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+button {
+  &:focus {
+    @include box-shadow(none);
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+.table {
+  border: 1px solid #eaecf0;
+  box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
+    0px 1px 2px rgba(16, 24, 40, 0.06);
+  border-radius: 8px;
+  background-color: $white;
+  padding: 10px 0px;
+
+  .top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 15px;
+
+    @media (max-width: 767px) {
+      & {
+        flex-direction: column;
+      }
+    }
+
+    .left {
+      display: flex;
+      align-items: center;
+
+      @media (max-width: 480px) {
+        & {
+          flex-wrap: wrap;
+          justify-content: center;
+        }
+      }
+
+      .custom {
+        margin-bottom: 0px;
+        width: 31px;
+        height: 36px;
+        padding: 0;
+      }
+    }
+  }
+
+  .right {
+    ul {
+      list-style-type: none;
+      padding: 0px;
+      margin: 0px;
+      display: flex;
+      align-items: center;
+
+      li {
+        margin-right: 25px;
+        font-size: 14px;
+        color: $grey-700;
+        font-family: "Inter";
+        font-weight: 500;
+
+        &:last-child {
+          margin-right: 0px;
+        }
+
+        .select {
+          width: 100px;
+
+          .css-13cymwt-control {
+            background-color: $white;
+            border-color: $grey-300;
+
+            .css-1u9des2-indicatorSeparator {
+              background-color: transparent;
+            }
+          }
+
+          .css-1nmdiq5-menu {
+            z-index: 111;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 767px) {
+      & {
+        margin: 15px 0px;
+      }
+    }
+  }
+
+  .global-table {
+    .rdt_TableHeadRow {
+      background-color: $grey-200;
+    }
+
+    .brFloq {
+      font-size: 12px;
+      color: $grey-500;
+      font-family: "Inter";
+      font-weight: 500;
+    }
+
+    .rdt_TableRow {
+      padding: 15px 0px;
+
+      .rdt_TableCell {
+        input {
+          width: 18px;
+          height: 18px;
+        }
+
+        span {
+          font-size: 14px;
+          color: $grey-900;
+          font-family: "Inter";
+          font-weight: 500;
+        }
+
+        p {
+          color: $grey-500;
+          font-size: 14px;
+          font-family: "Inter";
+          font-weight: 500;
+        }
+
+        div {
+          font-size: 14px;
+          color: $grey-500;
+          font-family: "Inter";
+          font-weight: 400;
+        }
+
+        button {
+          border: none;
+          background: transparent;
+          margin-right: 10px;
+
+          img {
+            width: 20px;
+            height: auto;
+          }
+        }
+
+        &:last-child {
+          justify-content: flex-end;
+        }
+      }
+    }
+  }
+
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+
+    @media (max-width: 767px) {
+      & {
+        flex-direction: column;
+      }
+    }
+
+    h5 {
+      font-size: 14px;
+      color: $grey-700;
+      font-family: "Inter";
+      font-weight: 500;
+
+      @media (max-width: 767px) {
+        & {
+          margin-bottom: 20px;
+        }
+      }
+    }
+
+    .btn-group {
+      .btn {
+        font-size: 14px;
+        color: $grey-800;
+        font-family: "Inter";
+        font-weight: 500;
+        border: 1px solid $grey-300;
+        padding: 10px;
+
+        @media (max-width: 480px) {
+          & {
+            font-size: 12px;
+          }
+        }
+
+        img {
+          margin: 0px 7px;
+        }
+
+        &:hover {
+          color: $grey-800 !important;
+          background-color: #f9fafb !important;
+          border-color: $grey-300;
+        }
+      }
+    }
+  }
+}
+
+.details-box {
+  border: 1px solid $grey-200;
+  box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
+    0px 1px 2px rgba(16, 24, 40, 0.06);
+  border-radius: 8px;
+  padding: 20px 20px 30px;
+  margin-top: 30px;
+
+  h4 {
+    color: $grey-900;
+    font-family: "Inter";
+    font-weight: 500;
+    padding: 0px 0px 20px;
+  }
+
+  form {
+    margin-top: 15px;
+
+    @media (max-width: 767px) {
+      &.row {
+        margin: 0 !important;
+      }
+    }
+
+    .input-border {
+      border-bottom: 2px solid $grey-200;
+      border-top: 2px solid $grey-200;
+      padding: 35px 0px 0px;
+      margin-bottom: 30px;
+
+      .form-label {
+        font-size: 14px;
+        font-family: "Inter";
+        font-weight: 500;
+        color: $grey-700;
+      }
+
+      .form-control {
+        font-size: 50px;
+        font-size: 16px;
+        font-family: "Inter";
+        font-weight: 400;
+        color: $grey-500;
+
+        &:focus {
+          box-shadow: none !important;
+          border-color: $grey-300;
+        }
+      }
+
+      .form-select:focus {
+        border-color: $grey-300;
+        box-shadow: none;
+
+        option {
+          font-size: 16px;
+          font-family: "Inter";
+          font-weight: 400;
+          color: $grey-500;
+        }
+      }
+    }
+
+    .form-label {
+      font-size: 14px;
+      font-family: "Inter";
+      font-weight: 500;
+      color: $grey-700;
+    }
+
+    .form-control {
+      font-size: 50px;
+      font-size: 16px;
+      font-family: "Inter";
+      font-weight: 400;
+      color: $grey-500;
+
+      &:focus {
+        box-shadow: none !important;
+        border-color: $grey-300;
+      }
+    }
+
+    .desktop {
+      margin: 0px 0px 25px;
+    }
+  }
+
+  .form-select:focus {
+    border-color: $grey-300;
+    box-shadow: none;
+
+    option {
+      font-size: 16px;
+      font-family: "Inter";
+      font-weight: 400;
+      color: $grey-500;
+    }
+  }
+}
+
+.select .css-1u9des2-indicatorSeparator {
+  display: none;
+}
+.icon-hover {
+  border: none;
+  height: 40px;
+  width: 40px;
+  border-radius: 50px;
+  transition: all 0.3s ease-in-out;
+  background-color: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background-color: $light-primary;
+    img {
+      filter: brightness(0) invert(1);
+    }
+  }
+}
+.modal-footer {
+  display: flex;
+  gap: 5px;
+}

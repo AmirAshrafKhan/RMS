@@ -1,0 +1,12 @@
+.setting-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  @media (max-width: 480px) {
+    & {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}

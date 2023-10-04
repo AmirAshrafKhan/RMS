@@ -1,0 +1,470 @@
+@import "../../assets/scss/helper/_variables";
+
+.profile {
+
+  .box {
+    .title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @media (max-width:576px) {
+        & {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width:576px) {
+        .subheading {
+          text-align: center;
+          margin-top: 15px;
+        }
+      }
+
+    }
+
+    .profile-top {
+      margin: 30px 0px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @media (max-width:576px) {
+        & {
+          flex-direction: column;
+        }
+      }
+
+      .has-search {
+        background-color: transparent;
+        box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+        border-radius: 8px;
+        border: 1px solid $grey-300;
+        color: $grey-500;
+        padding: 6px 14px;
+        display: flex;
+        align-items: center;
+        margin-right: 50px;
+
+        @media (max-width:576px) {
+          & {
+            margin-right: 0px;
+          }
+        }
+
+        .form-control {
+          color: $grey-500;
+          background-color: transparent;
+          border: none;
+
+          &::placeholder {
+            color: $grey-500;
+            font-family: "Inter";
+            font-size: 16px;
+            font-weight: 400px;
+          }
+
+          &:focus {
+            box-shadow: none;
+          }
+        }
+
+        span {
+          color: $light-primary;
+        }
+      }
+
+      .add-btn {
+        @media (max-width:576px) {
+          & {
+            margin-top: 20px;
+          }
+        }
+
+        .btn {
+          background-color: $light-primary;
+          box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+          border-radius: 8px;
+          padding: 10px 16px;
+          font-size: 16px;
+          font-family: "Inter";
+          font-weight: 600;
+          color: $white;
+        }
+      }
+    }
+
+    .filter-box {
+      margin-top: 50px;
+
+      .filter-left {
+        .title {
+          background-color: #f4f8fc;
+          padding: 15px 20px;
+          display: inherit;
+          box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.06);
+          border-radius: 5px;
+
+          h4 {
+            color: #1e1e1e;
+            font-family: "Inter";
+            font-weight: 600;
+            margin: 0px;
+          }
+        }
+
+        .selection {
+          margin: 20px 0px;
+          background-color: $white;
+          padding: 15px 20px;
+          box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.06);
+          border-radius: 8px;
+          border: 1px solid $grey-200;
+
+          h5 {
+            color: $light-primary;
+            font-family: "Inter";
+            font-weight: 500;
+            margin-bottom: 15px;
+          }
+
+          .item {
+            details {
+              &:not(:last-child) {
+                margin-bottom: 10px;
+              }
+
+              p {
+                padding: 10px 0 5px 0;
+              }
+
+              summary {
+                font-size: 14px;
+                color: $grey-900;
+                font-weight: 500;
+                font-family: "Inter";
+
+                &::marker {
+                  color: $grey-500;
+                }
+              }
+
+              label {
+                font-size: 12px;
+                color: $grey-700;
+                font-family: "Inter";
+                font-weight: 400;
+                // margin-top: 10px;
+
+                input[type="checkbox"]:after {
+                  top: -2px;
+                  left: -2px;
+                  width: 15px;
+                  height: 15px;
+                }
+              }
+
+              .custom {
+                margin: 3px;
+                margin-left: 10px;
+              }
+
+              a {
+                span {
+                  font-size: 16px;
+                  font-family: "Inter";
+                  font-weight: 500;
+                  color: $primary-700;
+                  margin-top: 10px;
+                }
+              }
+            }
+          }
+        }
+
+        .rating {
+          label {
+            font-size: 12px;
+            color: $grey-700;
+            font-family: "Inter";
+            font-weight: 400;
+            margin-top: 10px;
+            padding-left: 21px;
+
+            input[type="checkbox"]:after {
+              top: -2px;
+              left: -2px;
+              width: 15px;
+              height: 15px;
+            }
+          }
+
+          .custom {
+            margin: 0px;
+            margin-left: 10px;
+          }
+        }
+      }
+
+      .filter-right {
+        .top-bar {
+          display: flex;
+          gap: 12px;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          align-items: center;
+          background-color: $white;
+          padding: 10px 20px;
+          border: 1px solid $grey-200;
+          box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
+            0px 1px 2px rgba(16, 24, 40, 0.06);
+          margin-bottom: 20px;
+          border-radius: 5px;
+
+          button {
+            background: transparent;
+            border: none;
+            display: flex;
+            gap: 12px;
+          }
+
+          img {
+            width: 22px;
+          }
+
+          span {
+            margin: 0px;
+            color: $grey-700;
+            font-family: "Inter";
+            font-weight: 500;
+          }
+
+          label {
+            padding: 0;
+
+            input[type="checkbox"] {
+              position: relative;
+              top: inherit;
+              transform: inherit;
+
+              &:after {
+                top: -2px;
+                left: -2px;
+                width: 15px;
+                height: 15px;
+              }
+            }
+          }
+
+          .custom {
+            margin: 0px;
+          }
+
+          .css-1u9des2-indicatorSeparator {
+            background-color: transparent;
+          }
+        }
+
+        .profile-card {
+          background-color: $white;
+          border: 1px solid $grey-200;
+          box-shadow: 0px 1px 3px rgba(16, 24, 40, 0.1),
+            0px 1px 2px rgba(16, 24, 40, 0.06);
+          border-radius: 5px;
+          padding: 15px;
+          margin-bottom: 20px;
+
+          .title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            @media (max-width:576px) {
+              flex-direction: row;
+            }
+
+            .name {
+              display: flex;
+              align-items: center;
+
+              label {
+                font-size: 20px;
+                margin: 0px;
+                color: $primary-700;
+                font-family: "Inter";
+                font-weight: 600;
+              }
+
+              input[type="checkbox"]:after {
+                top: -2px;
+                left: -2px;
+                width: 15px;
+                height: 15px;
+              }
+
+              .custom {
+                margin: 0px;
+              }
+            }
+
+            .icons {
+              display: flex;
+              gap: 20px;
+
+              a {
+                width: 30px;
+                height: 30px;
+                display: grid;
+                place-items: center;
+                border-radius: 100%;
+                transition: 0.3s;
+
+                &:hover {
+                  background-color: $primary-700;
+
+                  img {
+                    filter: brightness(0) invert(1);
+                  }
+                }
+
+                &:last-child {
+                  margin-right: 0px;
+                }
+
+                img {
+                  width: 18px;
+                }
+              }
+            }
+          }
+
+          .profile-content {
+            margin-top: 25px;
+
+            ul {
+              padding: 0px;
+              list-style-type: none;
+
+              li {
+                font-size: 14px;
+                color: $grey-900;
+                font-family: "Inter";
+                font-weight: 400;
+                margin-bottom: 12px;
+
+                &:last-child {
+                  margin-bottom: 0px;
+                }
+
+                span {
+                  font-weight: 500;
+                }
+              }
+            }
+
+            .applied {
+              padding: 20px 0px;
+              border-top: 2px solid $grey-200;
+              border-bottom: 2px solid $grey-200;
+
+              ul {
+                display: flex;
+                margin: 0px;
+
+                @media (max-width:576px) {
+                  & {
+                    flex-direction: column;
+                  }
+                }
+
+                li {
+                  margin: 0px 20px 0px 0px;
+
+                  @media (max-width:576px) {
+                    &:nth-child(even) {
+                      display: none;
+
+                    }
+
+                    &:not(:last-child) {
+                      margin: 0px 0px 10px;
+                    }
+                  }
+                }
+              }
+            }
+
+            .bottom {
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              padding: 25px 18px 10px;
+
+              @media (max-width:576px) {
+                & {
+                  flex-direction: column;
+                }
+              }
+
+              .comment {
+                @media (max-width:576px) {
+                  & {
+
+                    margin-bottom: 15px;
+                  }
+                }
+
+                ul {
+                  display: flex;
+                  padding: 0px;
+                  margin: 0px;
+
+                  li {
+                    margin: 0px 20px 0px 0px;
+
+                    img {
+                      width: 25px;
+                      margin-right: 8px;
+                    }
+                  }
+                }
+              }
+
+              .rate {
+                display: flex;
+                align-items: center;
+
+                h5 {
+                  color: $grey-700;
+                  font-family: "Inter";
+                  font-weight: 500;
+                  margin: 0px 20px 0px 0px;
+                }
+
+                ul {
+                  display: flex;
+                  padding: 0px;
+                  margin: 0px;
+
+                  li {
+                    margin: 0px 10px 0px 0px;
+
+                    &:last-child {
+                      margin-right: 0px;
+                    }
+
+                    img {
+                      width: 25px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  
+}

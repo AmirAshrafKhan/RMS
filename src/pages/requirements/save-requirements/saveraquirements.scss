@@ -1,0 +1,43 @@
+@import '../../../assets/scss/helper/variables';
+
+.save-requirements {
+    .items {
+        padding: 20px 0px;
+
+        .title {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            @media (max-width:480px) {
+                & {
+                    flex-direction: column;
+                    align-items: start;
+                }
+            }
+
+            .stap {
+                h5 {
+                    color: $grey-900;
+                    font-weight: 500;
+                    font-family: 'Inter';
+                }
+            }
+
+        }
+
+        .bottom {
+            border-bottom: transparent;
+            margin-bottom: 0px;
+        }
+
+        .common-btn {
+            text-align: end;
+            margin-top: 30px;
+
+            .btn {
+                padding: 8px 50px;
+            }
+        }
+    }
+}
