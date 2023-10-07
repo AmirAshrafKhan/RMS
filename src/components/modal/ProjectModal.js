@@ -17,7 +17,7 @@ const ProjectModal = ({ isConfirm, closeConfirm, setProjectData }) => {
       };
 
       const response = await axios.post(
-        "https://talenthiring.in/rms/api/createProfileEducation",
+        "https://rms-buzzhiring.onrender.com/rms/api/createProfileEducation",
         {
           collegeName,
           course,

@@ -497,9 +497,9 @@ const AddProfile = () => {
                         <Form.Label className="expirence"></Form.Label>
                         <Select
                           className="select"
-                          options={OptionsLists.optionList("jobLocation")}
+                          options={OptionsLists.optionList("annualCTC")}
                           placeholder="select thousands"
-                          name="jobLocation"
+                          name="thousands"
                           value={expectedCTC.thousands}
                           onChange={(selectedOption) =>
                             setFormData((prevFormData) => ({

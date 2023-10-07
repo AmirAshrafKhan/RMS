@@ -17,7 +17,9 @@ const EducationModal = ({ isConfirm, closeConfirm, setEducationData }) => {
       };
 
       const response = await axios.post(
-        "https://talenthiring.in/rms/api/createProfileEducation",
+        // "https://talenthiring.in/rms/api/createProfileEducation",
+        "https://rms-buzzhiring.onrender.com/rms/api/createProfileEducation",
+
         {
           collegeName,
           course,
