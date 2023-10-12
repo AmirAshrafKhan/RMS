@@ -1,0 +1,57 @@
+@import "../../assets/scss/helper/_variables";
+
+.custom {
+  margin-bottom: 16px;
+}
+
+.custom.checkbox > label {
+  position: relative;
+  cursor: pointer;
+  padding-left: 25px;
+  font-size: 16px;
+}
+
+.custom input[type="checkbox"] {
+  position: absolute;
+  cursor: pointer;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+}
+
+.custom input[type="checkbox"]:after {
+  content: "";
+  position: absolute;
+  // top: -5px;
+  // left: -4px;
+  width: 20px;
+  height: 20px;
+  background: $white;
+  border: 2px solid $primary-700;
+  cursor: pointer;
+}
+
+.custom input[type="checkbox"]:before {
+  transition: transform 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
+  transform: rotate(-45deg) scale(0, 0);
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 3px;
+  z-index: 1;
+  width: 13px;
+  height: 7.5px;
+  border: 2px solid $primary-700;
+  border-top-style: none;
+  border-right-style: none;
+}
+
+.custom input[type="checkbox"]:checked:before {
+  transform: rotate(-45deg) scale(1, 1);
+}
+
+.custom input[type="checkbox"]:after {
+  border-radius: 2px;
+}

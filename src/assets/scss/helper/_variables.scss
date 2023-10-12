@@ -1,0 +1,58 @@
+$primary-font: 'Inter';
+
+$white: #ffffff;
+$black: #000000;
+$theme-color: #ffffff;
+
+$primary-700: #6941C6;
+$primary-600: #7F56D9;
+$primary-100: #F4EBFF;
+$light-primary: #7B61FF;
+
+$grey-900: #101828;
+$grey-800: #1D2939;
+$grey-700: #344054;
+$grey-500: #667085;
+$grey-300: #D0D5DD;
+$grey-200: #EAECF0;
+
+
+@mixin flex($items, $justify, $direction) {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: $items;
+  justify-content: $justify;
+  flex-direction: $direction;
+}
+
+// @include flex(center, center, null);
+
+// @include textEllipsis();
+
+@mixin transition($property) {
+  -webkit-transition: $property;
+  -ms-transition: $property;
+  transition: $property;
+}
+
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
+}
+
+@mixin box-shadow($property) {
+  -webkit-box-shadow: $property;
+  box-shadow: $property;
+}
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 767px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px) !default;

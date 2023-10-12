@@ -1,0 +1,15 @@
+@import '../../assets/scss/helper/_variables';
+
+.items {
+    h1 {
+        color: $grey-900;
+        font-family: 'Inter';
+        font-weight: 500;
+    }
+
+    h5 {
+        color: $grey-500;
+        font-family: 'Inter';
+        font-weight: 400;
+    }
+}

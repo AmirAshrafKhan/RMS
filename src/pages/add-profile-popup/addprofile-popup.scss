@@ -1,0 +1,15 @@
+@import "../../assets/scss/helper/_variables";
+.common-btn {
+    margin-top: 23px;
+    text-align: start !important;
+
+    .btn {
+      background-color: $light-primary;
+
+      &:hover {
+        background-color: transparent;
+        color: $light-primary;
+        border-color: $light-primary;
+      }
+    }
+  }

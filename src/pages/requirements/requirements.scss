@@ -1,0 +1,172 @@
+@import "../../assets/scss/helper/_variables";
+
+.requirements {
+
+  .content {
+    .item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      @media (max-width:480px) {
+        & {
+          flex-direction: column;
+        }
+      }
+
+      .add-btn {
+        .btn {
+          background-color: $light-primary;
+          box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+          border-radius: 8px;
+          padding: 10px 16px;
+          font-size: 16px;
+          font-family: "Inter";
+          font-weight: 600;
+          color: $white;
+
+          @media (max-width:767px) {
+            & {
+              font-size: 14px;
+              padding: 10px;
+            }
+          }
+        }
+      }
+    }
+
+    .filter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 30px 0px 20px;
+
+      @media (max-width:767px) {
+        & {
+          flex-direction: column;
+        }
+      }
+
+      .has-search {
+        background-color: transparent;
+        box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+        border-radius: 8px;
+        border: 1px solid $grey-300;
+        color: $grey-500;
+        padding: 6px 14px;
+        display: inline-flex;
+        align-items: center;
+        margin-right: 50px;
+
+        @media (max-width:767px) {
+          & {
+            margin: 0px 0px 20px;
+          }
+        }
+
+        .form-control {
+          color: $grey-500;
+          background-color: transparent;
+          border: none;
+
+          &::placeholder {
+            color: $grey-500;
+            font-family: "Inter";
+            font-size: 16px;
+            font-weight: 400px;
+          }
+
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+
+      .status {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h5 {
+          color: $grey-700;
+          font-family: "Inter";
+          font-weight: 500;
+        }
+
+        .select {
+          width: 150px;
+          margin-left: 60px;
+
+          @media (max-width:1199px) {
+            & {
+              margin-left: 20px;
+            }
+          }
+
+          @media (max-width:480px) {
+            & {
+              margin-left: 5px;
+            }
+
+            &.css-1fdsijx-ValueContainer {
+              padding: 0px;
+            }
+          }
+
+          .css-13cymwt-control,
+          .css-t3ipsp-control {
+            background-color: $light-primary;
+            border-color: transparent;
+            padding: 5px;
+            cursor: pointer;
+          }
+
+          .css-1n6sfyn-MenuList div {
+            cursor: pointer;
+          }
+
+          .css-1jqq78o-placeholder {
+            color: $primary-100;
+          }
+
+          .css-tj5bde-Svg {
+            color: $primary-100;
+          }
+
+          .css-1u9des2-indicatorSeparator {
+            display: none;
+          }
+
+          .css-1n6sfyn-MenuList {
+            background-color: $light-primary;
+            box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+            border-radius: 5px;
+          }
+
+          .css-d7l1ni-option {
+            background-color: $primary-100;
+          }
+
+          .css-tr4s17-option,
+          .css-10wo9uf-option,
+          .css-d7l1ni-option:active {
+            background-color: #f4ebff3d !important;
+            color: #fff;
+          }
+
+          .css-d7l1ni-option {
+            background-color: transparent;
+          }
+
+          .css-1dimb5e-singleValue {
+            color: $primary-100;
+          }
+
+          .css-166bipr-Input {
+            color: $primary-100;
+          }
+        }
+      }
+    }
+  }
+}
