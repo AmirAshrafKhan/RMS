@@ -9,6 +9,7 @@ const EducationModal = ({ isConfirm, closeConfirm, setEducationData }) => {
   const [course, setCourse] = useState("");
   const [year, setYear] = useState("");
   const [city, setCity] = useState("");
+
   const handleSaveChanges = async () => {
     try {
       const token = localStorage.getItem("token");

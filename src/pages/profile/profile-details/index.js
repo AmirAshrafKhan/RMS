@@ -33,11 +33,10 @@ const ProfileDetails = () => {
   const [summary, setsummary] = useState("");
   const location = useLocation();
   const { profileID } = location.state !== null && location.state;
-  debugger;
+
   useEffect(() => {
     console.log(profileID, "profileID");
     if (profileID !== undefined && profileID !== null) {
-      debugger;
       getProfileDetails();
     }
   }, []);
@@ -66,7 +65,7 @@ const ProfileDetails = () => {
   const handleExperienceData = async (formData) => {
     try {
       const response = await axios.post(
-        "https://talenthiring.in/rms/api/createProfileExperience",
+        "https://rms-buzzhiring.onrender.com/rms/api/createProfileExperience",
         {
           profileId: formData.profileId,
           experience: formData.experience,
@@ -82,7 +81,7 @@ const ProfileDetails = () => {
   const handleEducationData = async (formData) => {
     try {
       const response = await axios.post(
-        "https://talenthiring.in/rms/api/createProfileEducation",
+        "https://rms-buzzhiring.onrender.com/rms/api/createProfileEducation",
         {
           profile_id: formData.profileId,
           school_name: formData.schoolName,
@@ -100,7 +99,7 @@ const ProfileDetails = () => {
   const handleProjectData = async (formData) => {
     try {
       const response = await axios.post(
-        "https://talenthiring.in/rms/api/createProfileEducation",
+        "rms-buzzhiring.onrender.com/rms/api/createProfileEducation",
         {
           profile_id: formData.profileId,
           school_name: formData.schoolName,
@@ -320,9 +319,10 @@ const ProfileDetails = () => {
                   </div>
                   <div className="content">
                     <div className="left">
-                      <h4>
-                        Concentrix Daksh <span>(Current Employer)</span>
-                      </h4>
+                      <p>
+                        {profileDetails?.workExperience?.years} Year(s){" "}
+                        {profileDetails?.workExperience?.months} Month (s)
+                      </p>
                       <p>Team Leader | Jan 2021 To Jun 2022</p>
                     </div>
                     <div className="right">
@@ -352,11 +352,7 @@ const ProfileDetails = () => {
                   </div>
                   <div className="content">
                     <div className="left">
-                      <span>
-                        {profileDetails?.educationDetails?.ugQualification}
-                      </span>{" "}
-                      <br />
-                      {profileDetails?.educationDetails?.pgQualification}
+                      <span>{profileDetails.course}</span>
                     </div>
                     <div className="right">
                       <button

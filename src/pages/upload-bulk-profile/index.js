@@ -6,7 +6,7 @@ import { iconClose, iconTrash, iconProfileUpload } from "assets/images";
 import axios from "axios";
 import { apiBase } from "apiBase";
 
-const apiUrl = "http://3.15.201.35:3000/uploads/bulk-profiles";
+// const apiUrl = "http://3.15.201.35:3000/uploads/bulk-profiles";
 
 const UploadBulkProfile = () => {
   const [files, setFiles] = useState([]);
@@ -63,7 +63,6 @@ const UploadBulkProfile = () => {
   };
 
   const uploadBulk = async () => {
-    debugger;
     setFileErr("");
     console.log(files, "Files");
     console.log(isValidFileUploaded(files), "isValidFileUploaded(files)");

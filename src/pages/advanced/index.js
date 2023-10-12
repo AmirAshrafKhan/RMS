@@ -97,11 +97,57 @@ const Advanced = () => {
                         <h5>Keywords: </h5>
                       </Col>
                       <Col lg={10} md={8} className="margin-b">
-                        <Dropdown>
-                          <Dropdown.Toggle id="dropdown-basic">
-                            Type Keyword or Click tha arrow for more options
+                        <Dropdown className="search">
+                          {/* <Dropdown.Toggle id="dropdown-basic">
+
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder="Type Keyword or Click tha arrow for more options"
+                            />
                             <span>Expand</span>
-                          </Dropdown.Toggle>
+                          </Dropdown.Toggle>  */}
+                          <div
+                            className="form-group has-search"
+                            id="dropdown-basic"
+                          >
+                            <input
+                              type="text"
+                              className="form-control"
+                              placeholder="Select or Start Typing"
+                            />
+                            <Dropdown>
+                              <Dropdown.Toggle id="dropdown-basic">
+                                Expand
+                              </Dropdown.Toggle>
+
+                              <Dropdown.Menu>
+                                <Dropdown.Item href="#/action-1">
+                                  Action
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">
+                                  Another action
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">
+                                  Something else
+                                </Dropdown.Item>
+                              </Dropdown.Menu>
+                            </Dropdown>
+                            {/* <span className="icon form-control-feedback">
+                              Expand
+                            </span> */}
+                            {/* <Dropdown.Menu>
+                              <Dropdown.Item href="#/action-1">
+                                Action
+                              </Dropdown.Item>
+                              <Dropdown.Item href="#/action-2">
+                                Another action
+                              </Dropdown.Item>
+                              <Dropdown.Item href="#/action-3">
+                                Something else
+                              </Dropdown.Item>
+                            </Dropdown.Menu> */}
+                          </div>
 
                           <Dropdown.Menu>
                             <Dropdown.Item href="#/action-1">
@@ -607,14 +653,13 @@ const Advanced = () => {
                         <Col lg={4} md={6} className="margin-b">
                           <p>(In years)</p>
                         </Col>
-
                       </Row>
                     </Col>
 
                     <Col lg={3} md={4} className="margin-b">
                       <h5>Work Status For:</h5>
                     </Col>
-                    <Col lg={9} md={8} >
+                    <Col lg={9} md={8}>
                       <Row>
                         <Col lg={6} md={6} className="margin-b">
                           <Select

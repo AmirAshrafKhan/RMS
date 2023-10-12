@@ -26,7 +26,7 @@ const Header = () => {
                     <img src={iconSearch} alt="" />
                   </span>
                   <input
-                    type="text"
+                    type="email"
                     className="form-control"
                     placeholder="Email"
                   />
