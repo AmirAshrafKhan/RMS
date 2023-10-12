@@ -865,7 +865,7 @@ const Advanced = () => {
             <Col lg={3} md={12}>
               <div className="right">
                 <div className="item">
-                  <h4>Rescent Searches</h4>
+                  <h4>Recent Searches</h4>
                   <h5>Requirements Sales-Gurgoan</h5>
                   <p>25 may 23</p>
                   <a href="/">Show More</a>
