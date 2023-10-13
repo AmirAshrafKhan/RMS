@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Col, Form, Modal, Row } from "react-bootstrap";
 import "./modal.scss";
 import CheckboxTitle from "components/checkbox-title";
 import CommonButton from "components/common-button";
+import OptionsLists from "OptionsLists";
+import Select from "react-select";
+import { apiBase } from "apiBase";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
+  const navigate = useNavigate();
+  const [updateProfile, setUpdateProfile] = useState(false);
+  const [validated, setValidated] = useState(false);
   const [formData, setFormData] = useState({
     companyName: "",
     position: "",
@@ -12,6 +20,25 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
     endDate: "",
     isCurrent: false,
   });
+  const {
+    fullName,
+    jobDescription,
+    currentDesignation,
+
+    currentCompany,
+
+    functionalArea,
+    role,
+    industry,
+
+    rating,
+    joiningDate,
+
+    course,
+  } = formData;
+  const location = useLocation();
+  const { profileID } = location.state !== null && location.state;
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -34,7 +61,82 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
     // Close the modal
     closeConfirm();
   };
+
+  const getProfileDetails = async () => {
+    try {
+      const response = await apiBase.get(`profile/details/${profileID}`, {
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
+      debugger;
+      if (response.status === 200) {
+        debugger;
+
+        const {
+          fullName,
+
+          currentDesignation,
+
+          currentCompany,
+        } = response.data.data;
+        setFormData({
+          ...formData,
+          fullName: fullName,
+
+          currentDesignation: currentDesignation,
+
+          currentCompany: currentCompany,
+        });
+        // console.log(getKeyByValue(response.data.data,formData),'Keysss')
+      }
+    } catch (error) {
+      debugger;
+      console.log(error);
+    }
+  };
+
+  const handleUpdate = async (event) => {
+    console.log(formData, "formData expere");
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+    } else {
+      try {
+        const response = await apiBase.put(
+          `profile/update/${profileID}`,
+          formData,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        if (response.status === 200) {
+          // history('/profile');
+          navigate("/profile");
+        }
+
+        setValidated(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    setValidated(true);
+  };
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   console.log(formData);
+
   return (
     <Modal
       show={isConfirm}
@@ -50,23 +152,37 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
         <Form>
           <Form.Group as={Col} className="mb-3" controlId="formGridText">
             <Form.Label>Company Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Company Name"
-              name="companyName"
-              value={formData.companyName}
-              onChange={handleInputChange}
+            <textarea
+              required
+              className="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              placeholder="Enter a description About your company"
+              onResize={false}
+              name="currentCompany"
+              value={currentCompany}
+              onChange={handleChange}
             />
           </Form.Group>
 
           <Form.Group as={Col} className="mb-3" controlId="formGridText">
-            <Form.Label>Position</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Position"
-              name="position"
-              value={formData.position}
-              onChange={handleInputChange}
+            <Form.Label>Current Designation</Form.Label>
+            <Select
+              className="select"
+              options={OptionsLists.optionList("jobCategorization")}
+              placeholder=" Search & select designation"
+              name="currentDesignation"
+              value={OptionsLists.optionList("jobCategorization").filter(
+                function (option) {
+                  return option.value === currentDesignation;
+                }
+              )}
+              onChange={(selectedOption) =>
+                setFormData((prevFormData) => ({
+                  ...prevFormData,
+                  currentDesignation: selectedOption.value,
+                }))
+              }
             />
           </Form.Group>
 
@@ -116,7 +232,10 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
         {/* <Button variant="primary" onClick={closeConfirm}>
           Save Changes
         </Button> */}
-        <CommonButton onClick={closeConfirm} title="Save Changes" />
+        <CommonButton
+          onClick={closeConfirm ? handleUpdate : handleSubmit}
+          title="Save Changes"
+        />
       </Modal.Footer>
     </Modal>
   );

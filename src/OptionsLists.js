@@ -72,6 +72,12 @@ function optionList(list) {
       { value: "2/1/2023", label: "2/1/2023" },
       { value: "3/1/2023", label: "3/1/2023" },
     ];
+  } else if (list === "degree") {
+    options = [
+      { label: "Computer Science", value: "Computer Science" },
+      { value: "B.Sc", label: "B.Sc" },
+      { value: "MBA", label: "MBA" },
+    ];
   }
 
   return options;

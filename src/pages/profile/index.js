@@ -1660,9 +1660,8 @@ const Profile = () => {
                             <Col lg={6} md={6}>
                               <ul>
                                 <li>
-                                  <span>Experience:</span>{" "}
-                                  {val.workExperience.years} Year(s){" "}
-                                  {val.workExperience.months} Month (s)
+                                  <span>Experience:</span> {val.currentCompany}{" "}
+                                  {val.currentDesignation}
                                 </li>
                                 <li>
                                   <span>Current Designation: </span>{" "}

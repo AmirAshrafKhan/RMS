@@ -135,6 +135,9 @@ const AddProfilePopup = () => {
           workExperience,
           currentCompany,
           currentCTC,
+          keySkills,
+          industry,
+          role,
         } = response.data.data;
         setFormData({
           ...formData,
@@ -145,6 +148,9 @@ const AddProfilePopup = () => {
           workExperience: workExperience.years,
           currentCompany: currentCompany,
           currentCTC: currentCTC,
+          keySkills: keySkills,
+          industry: industry,
+          role,
         });
         // console.log(getKeyByValue(response.data.data,formData),'Keysss')
       }
