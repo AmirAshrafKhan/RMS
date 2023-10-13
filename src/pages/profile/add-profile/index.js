@@ -198,6 +198,7 @@ const AddProfile = () => {
           formData,
           {
             headers: {
+              "Content-Type": "multipart/form-data",
               Authorization: localStorage.getItem("token"),
             },
           }
@@ -230,7 +231,7 @@ const AddProfile = () => {
           <div className="profile-details">
             <div className="details-box">
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                <h4>Please Fill up the Profile Details</h4>
+                <h4>Please Fill up the Profile Details here</h4>
                 <Row className="input-border">
                   <Col lg={6} md={6}>
                     <Row>
@@ -455,7 +456,7 @@ const AddProfile = () => {
                     </Row>
                   </Col>
                   <Col className="desktop" lg={6} md={6}>
-                    <Form.Label>Prefered City</Form.Label>
+                    <Form.Label>Current City</Form.Label>
                     <Select
                       className="select"
                       options={OptionsLists.optionList("jobLocation")}

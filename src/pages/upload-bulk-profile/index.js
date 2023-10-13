@@ -5,10 +5,12 @@ import "./upload-bulk-profile.scss";
 import { iconClose, iconTrash, iconProfileUpload } from "assets/images";
 import axios from "axios";
 import { apiBase } from "apiBase";
+import { useNavigate } from "react-router-dom";
 
 // const apiUrl = "http://3.15.201.35:3000/uploads/bulk-profiles";
 
 const UploadBulkProfile = () => {
+  const navigate = useNavigate();
   const [files, setFiles] = useState([]);
   const [fileErr, setFileErr] = useState("");
 
@@ -72,11 +74,18 @@ const UploadBulkProfile = () => {
 
       const formData = new FormData();
       Array.from(files).forEach((file) => {
-        formData.append("CV", file);
+        formData.append("cvs", file);
       });
 
       // const formData = new FormData();
       // formData.append(`cvs`, files);
+
+      // const formData = new FormData();
+      // Array.from(files).forEach((file, index) => {
+      //   // Append each file with a unique key
+      //   formData.append("cvs", files);
+      // });
+
       try {
         const response = await apiBase.post("uploads/bulk-profiles", formData, {
           headers: {
@@ -87,7 +96,8 @@ const UploadBulkProfile = () => {
         console.log(response, "respose");
 
         if (response.status === 200) {
-          setFiles(null);
+          setFiles(response);
+          navigate("/profile");
         } else {
           console.log(response);
         }

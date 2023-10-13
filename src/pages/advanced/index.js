@@ -117,7 +117,14 @@ const Advanced = () => {
                               placeholder="Select or Start Typing"
                             />
                             <Dropdown>
-                              <Dropdown.Toggle id="dropdown-basic">
+                              <Dropdown.Toggle
+                                id="dropdown-basic"
+                                style={{
+                                  background: "white",
+                                  color: "#5000ff",
+                                  border: "none",
+                                }}
+                              >
                                 Expand
                               </Dropdown.Toggle>
 
@@ -161,8 +168,8 @@ const Advanced = () => {
                             </Dropdown.Item>
                           </Dropdown.Menu>
 
-                          <div className="check">
-                            <h6>Search in :</h6>
+                          {/* <div className="check">
+                            <h6>Search in:</h6>
                             <Form.Check
                               inline
                               label="Entire Resume"
@@ -185,6 +192,37 @@ const Advanced = () => {
                               id="inline-radio-3"
                             />
 
+                            <Form.Check
+                              inline
+                              label="Resume Title"
+                              name="group1"
+                              type="radio"
+                              id="inline-radio-4"
+                            />
+                          </div> */}
+                          <div class="check">
+                            <h6>Search in:</h6>
+                            <Form.Check
+                              inline
+                              label="Entire Resume"
+                              name="group1"
+                              type="radio"
+                              id="inline-radio-1"
+                            />
+                            <Form.Check
+                              inline
+                              label="Resume Title & Key Skills"
+                              name="group1"
+                              type="radio"
+                              id="inline-radio-2"
+                            />
+                            <Form.Check
+                              inline
+                              label="Resume Synopsis"
+                              name="group1"
+                              type="radio"
+                              id="inline-radio-3"
+                            />
                             <Form.Check
                               inline
                               label="Resume Title"
@@ -297,7 +335,14 @@ const Advanced = () => {
                           <div className="bottom">
                             <CheckboxTitle title="Preferred location is " />
                             <Dropdown>
-                              <Dropdown.Toggle id="dropdown-basic">
+                              <Dropdown.Toggle
+                                id="dropdown-basic"
+                                style={{
+                                  background: "white",
+                                  color: "black",
+                                  border: "none",
+                                }}
+                              >
                                 same age above
                               </Dropdown.Toggle>
 
