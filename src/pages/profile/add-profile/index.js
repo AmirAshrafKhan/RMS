@@ -198,7 +198,6 @@ const AddProfile = () => {
           formData,
           {
             headers: {
-              "Content-Type": "multipart/form-data",
               Authorization: localStorage.getItem("token"),
             },
           }
@@ -231,7 +230,7 @@ const AddProfile = () => {
           <div className="profile-details">
             <div className="details-box">
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                <h4>Please Fill up the Profile Details here</h4>
+                <h4>Please Fill up the Profile Details</h4>
                 <Row className="input-border">
                   <Col lg={6} md={6}>
                     <Row>
@@ -241,19 +240,19 @@ const AddProfile = () => {
                           <Form.Control
                             required
                             type="text"
-                            placeholder="Please Enter Name "
+                            placeholder="Enter requirement title "
                             name="fullName"
                             value={fullName}
                             onChange={handleChange}
                           />
                           <Form.Control.Feedback type="invalid">
-                            Please Enter Name
+                            Please Enter requirement title
                           </Form.Control.Feedback>
                         </Form.Group>
                       </Col>
 
                       <Col lg={12} md={12} className="desktop">
-                        <Form.Label>Job Description (Required)</Form.Label>
+                        <Form.Label>Jon Description (Required)</Form.Label>
 
                         <textarea
                           required
@@ -374,9 +373,7 @@ const AddProfile = () => {
                         <Form.Label className="expirence"></Form.Label>
                         <Select
                           className="select"
-                          options={OptionsLists.optionList(
-                            "minimumWorkExperience"
-                          )}
+                          options={OptionsLists.optionList("monthsExperience")}
                           placeholder=" 
                           select month"
                           name="months"
@@ -455,18 +452,18 @@ const AddProfile = () => {
                       </Col>
                     </Row>
                   </Col>
+
                   <Col className="desktop" lg={6} md={6}>
                     <Form.Label>Current City</Form.Label>
                     <Select
                       className="select"
                       options={OptionsLists.optionList("jobLocation")}
-                      placeholder="Search & select city  "
-                      name="preferredCity"
-                      value={preferredCity}
+                      placeholder="Search & select city "
+                      value={currentCity}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
-                          preferredCity: selectedOption.value,
+                          currentCity: selectedOption.value,
                         }))
                       }
                     />
@@ -498,7 +495,7 @@ const AddProfile = () => {
                         <Form.Label className="expirence"></Form.Label>
                         <Select
                           className="select"
-                          options={OptionsLists.optionList("annualCTC")}
+                          options={OptionsLists.optionList("thousands")}
                           placeholder="select thousands"
                           name="thousands"
                           value={expectedCTC.thousands}
@@ -663,7 +660,7 @@ const AddProfile = () => {
                     <Select
                       className="select"
                       options={OptionsLists.optionList("rating")}
-                      placeholder="  Select Rating"
+                      placeholder="  select rating"
                       name="rating"
                       value={rating}
                       onChange={(selectedOption) =>
@@ -676,8 +673,7 @@ const AddProfile = () => {
                   </Col>
 
                   <Col className="desktop" lg={6} md={6}>
-                    <Form.Label>Joining Date</Form.Label>
-
+                    <Form.Label>joining Date</Form.Label>
                     <Form.Control
                       type="date"
                       max="2030-12-31"
@@ -693,12 +689,12 @@ const AddProfile = () => {
                   </Col>
 
                   <Col className="desktop" lg={6} md={6}>
-                    <Form.Label>Last Modified</Form.Label>
-                    <Form.Control
-                      className="select"
+                    <Form.Label>last Modified</Form.Label>
+                    <Select
                       type="date"
+                      className="select"
                       options={OptionsLists.optionList("Date")}
-                      placeholder="  Select Last Modified Date"
+                      placeholder="  select last Modified Date"
                       name="lastModified"
                       value={lastModified}
                       onChange={(selectedOption) =>
@@ -711,13 +707,13 @@ const AddProfile = () => {
                   </Col>
 
                   <Col className="desktop" lg={6} md={6}>
-                    <Form.Label>Course</Form.Label>
+                    <Form.Label>course</Form.Label>
                     <Select
                       className="select"
                       options={OptionsLists.optionList(
                         "educationQualification"
                       )}
-                      placeholder="  Select Course"
+                      placeholder="  select course"
                       name="course"
                       value={course}
                       onChange={(selectedOption) =>
@@ -729,11 +725,11 @@ const AddProfile = () => {
                     />
                   </Col>
                   <Col className="desktop" lg={6} md={6}>
-                    <Form.Label>Notice Period</Form.Label>
+                    <Form.Label>noticePeriod</Form.Label>
                     <Select
                       className="select"
                       options={OptionsLists.optionList("Date")}
-                      placeholder="  Select Notice Period"
+                      placeholder="  select noticePeriod"
                       name="noticePeriod"
                       value={noticePeriod}
                       onChange={(selectedOption) =>
@@ -752,7 +748,7 @@ const AddProfile = () => {
                       options={OptionsLists.optionList(
                         "educationQualification"
                       )}
-                      placeholder="  Select UG Qualification"
+                      placeholder="  select ug Qualification"
                       name="ugQualification"
                       value={educationDetails.ugQualification}
                       onChange={(selectedOption) =>
@@ -773,7 +769,7 @@ const AddProfile = () => {
                       options={OptionsLists.optionList(
                         "educationQualification"
                       )}
-                      placeholder="  Select PG Qualification"
+                      placeholder="  select pg Qualification"
                       name="pgQualification"
                       value={educationDetails.pgQualification}
                       onChange={(selectedOption) =>
