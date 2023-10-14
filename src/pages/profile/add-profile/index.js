@@ -230,7 +230,7 @@ const AddProfile = () => {
           <div className="profile-details">
             <div className="details-box">
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                <h4>Please Fill up the Profile Details</h4>
+                <h4>Please Fill up the Profile Details below</h4>
                 <Row className="input-border">
                   <Col lg={6} md={6}>
                     <Row>
