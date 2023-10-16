@@ -44,6 +44,7 @@ const AddProfile = () => {
     noticePeriod: "",
     educationDetails: {},
     employmentType: "Full Time",
+    qualification: "",
 
     additionalDetails: {
       resumeProcessedBy: "Me",
@@ -67,6 +68,7 @@ const AddProfile = () => {
     jobDescription,
     email,
     phone,
+    qualification,
     currentDesignation,
     currentCompany,
     currentCTC,
@@ -230,7 +232,7 @@ const AddProfile = () => {
           <div className="profile-details">
             <div className="details-box">
               <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                <h4>Please Fill up the Profile Details below</h4>
+                <h4>Please Fill up the Profile Details</h4>
                 <Row className="input-border">
                   <Col lg={6} md={6}>
                     <Row>
@@ -252,7 +254,7 @@ const AddProfile = () => {
                       </Col>
 
                       <Col lg={12} md={12} className="desktop">
-                        <Form.Label>Jon Description (Required)</Form.Label>
+                        <Form.Label>Job Description (Required)</Form.Label>
 
                         <textarea
                           required
@@ -356,7 +358,11 @@ const AddProfile = () => {
                           )}
                           placeholder=" select year"
                           name="years"
-                          value={workExperience.years}
+                          value={OptionsLists.optionList(
+                            "minimumWorkExperience"
+                          ).filter(function (option) {
+                            return option.value === workExperience.years;
+                          })}
                           onChange={(selectedOption) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
@@ -377,7 +383,11 @@ const AddProfile = () => {
                           placeholder=" 
                           select month"
                           name="months"
-                          value={workExperience.months}
+                          value={OptionsLists.optionList(
+                            "monthsExperience"
+                          ).filter(function (option) {
+                            return option.value === workExperience.months;
+                          })}
                           onChange={(selectedOption) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
@@ -399,7 +409,11 @@ const AddProfile = () => {
                       options={OptionsLists.optionList("jobLocation")}
                       placeholder=" Select Company"
                       name="currentCompany"
-                      value={currentCompany}
+                      value={OptionsLists.optionList("jobLocation").filter(
+                        function (option) {
+                          return option.value === currentCompany;
+                        }
+                      )}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -418,7 +432,12 @@ const AddProfile = () => {
                           options={OptionsLists.optionList("annualCTC")}
                           placeholder="  select lakhs"
                           name="currentCTCLakhs"
-                          value={currentCTC.lakhs}
+                          // value={currentCTC.lakhs}
+                          value={OptionsLists.optionList("annualCTC").filter(
+                            function (option) {
+                              return option.value === currentCTC.lakhs;
+                            }
+                          )}
                           onChange={(selectedOption) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
@@ -438,7 +457,11 @@ const AddProfile = () => {
                           options={OptionsLists.optionList("thousands")}
                           placeholder=" select thousands"
                           name="currentCTCThous"
-                          value={currentCTC.thousands}
+                          value={OptionsLists.optionList("thousands").filter(
+                            function (option) {
+                              return option.value === currentCTC.thousands;
+                            }
+                          )}
                           onChange={(selectedOption) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
@@ -459,7 +482,14 @@ const AddProfile = () => {
                       className="select"
                       options={OptionsLists.optionList("jobLocation")}
                       placeholder="Search & select city "
-                      value={currentCity}
+                      value={OptionsLists.optionList("jobLocation").filter(
+                        function (option) {
+                          return option.value === currentCity;
+                        }
+                      )}
+                      // {...CityList.name.map((result) => (
+                      //   <options text={result?.id}>{result?.name}</options>
+                      // ))}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -478,7 +508,11 @@ const AddProfile = () => {
                           options={OptionsLists.optionList("annualCTC")}
                           placeholder="select lakhs"
                           name="lakhs"
-                          value={expectedCTC.lakhs}
+                          value={OptionsLists.optionList("annualCTC").filter(
+                            function (option) {
+                              return option.value === expectedCTC.lakhs;
+                            }
+                          )}
                           onChange={(selectedOption) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
@@ -498,7 +532,11 @@ const AddProfile = () => {
                           options={OptionsLists.optionList("thousands")}
                           placeholder="select thousands"
                           name="thousands"
-                          value={expectedCTC.thousands}
+                          value={OptionsLists.optionList("thousands").filter(
+                            function (option) {
+                              return option.value === expectedCTC.thousands;
+                            }
+                          )}
                           onChange={(selectedOption) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
@@ -520,7 +558,11 @@ const AddProfile = () => {
                       options={OptionsLists.optionList("jobLocation")}
                       placeholder="Search & select city  "
                       name="preferredCity"
-                      value={preferredCity}
+                      value={OptionsLists.optionList("jobLocation").filter(
+                        function (option) {
+                          return option.value === preferredCity;
+                        }
+                      )}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -538,7 +580,11 @@ const AddProfile = () => {
                       placeholder="
                       Search & select functional area (e.i  Product management)"
                       name="functionalArea"
-                      value={functionalArea}
+                      value={OptionsLists.optionList(
+                        "jobCategorization"
+                      ).filter(function (option) {
+                        return option.value === functionalArea;
+                      })}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -556,7 +602,11 @@ const AddProfile = () => {
                       placeholder="
                       Search & select role "
                       name="role"
-                      value={role}
+                      value={OptionsLists.optionList(
+                        "jobCategorization"
+                      ).filter(function (option) {
+                        return option.value === role;
+                      })}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -574,7 +624,11 @@ const AddProfile = () => {
                       placeholder="
                       Search & select industry "
                       name="industry"
-                      value={industry}
+                      value={OptionsLists.optionList(
+                        "jobCategorization"
+                      ).filter(function (option) {
+                        return option.value === industry;
+                      })}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -591,7 +645,11 @@ const AddProfile = () => {
                       options={OptionsLists.optionList("previousRequirements")}
                       placeholder=" Search & select requirements from the list"
                       name="keySkills"
-                      value={keySkills}
+                      value={OptionsLists.optionList(
+                        "previousRequirements"
+                      ).filter(function (option) {
+                        return option.value === keySkills;
+                      })}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -610,7 +668,11 @@ const AddProfile = () => {
                       options={OptionsLists.optionList("previousRequirements")}
                       placeholder="Search & select requirements from the list"
                       name="selectedRequirements"
-                      value={selectedRequirements}
+                      value={OptionsLists.optionList(
+                        "previousRequirements"
+                      ).filter(function (option) {
+                        return option.value === selectedRequirements;
+                      })}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -662,7 +724,11 @@ const AddProfile = () => {
                       options={OptionsLists.optionList("rating")}
                       placeholder="  select rating"
                       name="rating"
-                      value={rating}
+                      value={OptionsLists.optionList("rating").filter(function (
+                        option
+                      ) {
+                        return option.value === rating;
+                      })}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -673,8 +739,24 @@ const AddProfile = () => {
                   </Col>
 
                   <Col className="desktop" lg={6} md={6}>
-                    <Form.Label>joining Date</Form.Label>
-                    <Form.Control
+                    <Form.Label>Joining Date</Form.Label>
+                    <Select
+                      // type="date"
+                      // className="select"
+                      // options={OptionsLists.optionList("Date")}
+                      // placeholder="  select joining Date"
+                      // value={OptionsLists.optionList("Date").filter(function (
+                      //   option
+                      // ) {
+                      //   return option.value === joiningDate;
+                      // })}
+                      // onChange={(selectedOption) =>
+                      //   setFormData((prevFormData) => ({
+                      //     ...prevFormData,
+                      //     joiningDate: selectedOption.value,
+                      //   }))
+                      // }
+
                       type="date"
                       max="2030-12-31"
                       name="joiningDate"
@@ -689,14 +771,18 @@ const AddProfile = () => {
                   </Col>
 
                   <Col className="desktop" lg={6} md={6}>
-                    <Form.Label>last Modified</Form.Label>
+                    <Form.Label>Last Modified</Form.Label>
                     <Select
                       type="date"
                       className="select"
                       options={OptionsLists.optionList("Date")}
                       placeholder="  select last Modified Date"
                       name="lastModified"
-                      value={lastModified}
+                      value={OptionsLists.optionList("Date").filter(function (
+                        option
+                      ) {
+                        return option.value === lastModified;
+                      })}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -707,15 +793,17 @@ const AddProfile = () => {
                   </Col>
 
                   <Col className="desktop" lg={6} md={6}>
-                    <Form.Label>course</Form.Label>
+                    <Form.Label>Course</Form.Label>
                     <Select
                       className="select"
-                      options={OptionsLists.optionList(
-                        "educationQualification"
-                      )}
+                      options={OptionsLists.optionList("degree")}
                       placeholder="  select course"
                       name="course"
-                      value={course}
+                      value={OptionsLists.optionList("degree").filter(function (
+                        option
+                      ) {
+                        return option.value === course;
+                      })}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -725,13 +813,17 @@ const AddProfile = () => {
                     />
                   </Col>
                   <Col className="desktop" lg={6} md={6}>
-                    <Form.Label>noticePeriod</Form.Label>
+                    <Form.Label>Notice Period</Form.Label>
                     <Select
                       className="select"
-                      options={OptionsLists.optionList("Date")}
+                      options={OptionsLists.optionList("NP")}
                       placeholder="  select noticePeriod"
                       name="noticePeriod"
-                      value={noticePeriod}
+                      value={OptionsLists.optionList("NP").filter(function (
+                        option
+                      ) {
+                        return option.value === noticePeriod;
+                      })}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -742,69 +834,53 @@ const AddProfile = () => {
                   </Col>
 
                   <Col className="desktop" lg={6} md={6}>
-                    <Form.Label>UG Qualification</Form.Label>
+                    <Form.Label>Qualification</Form.Label>
                     <Select
                       className="select"
                       options={OptionsLists.optionList(
                         "educationQualification"
                       )}
-                      placeholder="  select ug Qualification"
-                      name="ugQualification"
-                      value={educationDetails.ugQualification}
-                      onChange={(selectedOption) =>
-                        setFormData((prevFormData) => ({
-                          ...prevFormData,
-                          educationDetails: {
-                            ugQualification: selectedOption.value,
-                            ...educationDetails,
-                          },
-                        }))
-                      }
-                    />
-                  </Col>
-                  <Col className="desktop" lg={6} md={6}>
-                    <Form.Label>PG Qualification</Form.Label>
-                    <Select
-                      className="select"
-                      options={OptionsLists.optionList(
+                      placeholder="  Select Qualification"
+                      name="educationQualification"
+                      value={OptionsLists.optionList(
                         "educationQualification"
-                      )}
-                      placeholder="  select pg Qualification"
-                      name="pgQualification"
-                      value={educationDetails.pgQualification}
+                      ).filter(function (option) {
+                        return option.value === qualification;
+                      })}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
-                          educationDetails: {
-                            pgQualification: selectedOption.value,
-                            ...educationDetails,
-                          },
+                          qualification: selectedOption.value,
                         }))
                       }
                     />
                   </Col>
 
                   {/* <Col className="desktop" lg={6} md={6}>
-                        <Form.Label>employment Type</Form.Label>
-                        <Select
-                          className="select"
-                          options={OptionsLists.optionList("previousRequirements")}
-                          placeholder="  select employment Type"
-                          name="employmentType"
-                          value={employmentType}
-                          onChange={(selectedOption) =>
-                            setFormData((prevFormData) => ({
-                              ...prevFormData,
-                              employmentType: selectedOption.value,
-                            }))
-                          }
-                        />
-                      </Col> */}
+                    <Form.Label>Employment Type</Form.Label>
+                    <Select
+                      className="select"
+                      options={OptionsLists.optionList("employmentType")}
+                      placeholder="  select employment Type"
+                      name="employmentType"
+                      value={OptionsLists.optionList("employmentType").filter(
+                        function (option) {
+                          return option.value === employmentType;
+                        }
+                      )}
+                      onChange={(selectedOption) =>
+                        setFormData((prevFormData) => ({
+                          ...prevFormData,
+                          employmentType: selectedOption.value,
+                        }))
+                      }
+                    />
+                  </Col> */}
                 </Row>
                 <div className="bottom-btn">
                   <CommonButton
                     title={
-                      updateProfile ? "+ Update Profile" : "+ Add New Profile"
+                      updateProfile ? " Update Profile" : " Add New Profile"
                     }
                     type="button"
                     onClick={updateProfile ? handleUpdate : handleSubmit}

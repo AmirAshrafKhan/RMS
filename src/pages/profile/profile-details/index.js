@@ -33,7 +33,7 @@ const ProfileDetails = () => {
   const [summary, setsummary] = useState("");
   const location = useLocation();
   const { profileID } = location.state !== null && location.state;
-  debugger;
+
   useEffect(() => {
     console.log(profileID, "profileID");
     if (profileID !== undefined && profileID !== null) {
@@ -49,7 +49,7 @@ const ProfileDetails = () => {
           Authorization: localStorage.getItem("token"),
         },
       });
-      debugger;
+
       if (response.status === 200) {
         debugger;
         setProfileDetails(response.data.data);
@@ -128,6 +128,7 @@ const ProfileDetails = () => {
     setIsEducation(!isEducation);
   }
   function handleExperience() {
+    debugger;
     setIsExperience(!isExperience);
   }
   function handleProject() {
@@ -170,7 +171,7 @@ const ProfileDetails = () => {
             <div className="title">
               <Heading
                 title="Profile"
-                description="Add new requirement by filling out this form"
+                description="Add new requirement details by filling out this form"
               />
               <div className="top-bar">
                 <button>
@@ -284,15 +285,15 @@ const ProfileDetails = () => {
                   <div className="applied">
                     <ul>
                       <li>
-                        <span>Applied on:</span> 30th July 22
+                        <span>Applied on:</span> {profileDetails?.joiningDate?.substring(0, 10)}
                       </li>
                       <li>|</li>
                       <li>
-                        <span>Active:</span> 30th July 22
+                        <span>Active:</span> {profileDetails?.lastModified?.substring(0, 10)}
                       </li>
                       <li>|</li>
                       <li>
-                        <span>Modified:</span> {profileDetails?.lastModified}
+                        <span>Modified:</span> {profileDetails?.lastModified?.substring(0, 10)}
                       </li>
                     </ul>
                   </div>
@@ -320,10 +321,19 @@ const ProfileDetails = () => {
                   </div>
                   <div className="content">
                     <div className="left">
-                      <h4>
-                        Concentrix Daksh <span>(Current Employer)</span>
-                      </h4>
-                      <p>Team Leader | Jan 2021 To Jun 2022</p>
+                      {profileDetails?.experience?.map((emp) => {
+                        return (
+                          <>
+                            <h4>
+                              <span>{emp?.companyName}</span>
+                            </h4>
+                            <p>
+                              {emp?.position} | {emp?.startDate}{" "}
+                              {emp?.endDate ? "To" + emp?.endDate : null}{" "}
+                            </p>
+                          </>
+                        );
+                      })}
                     </div>
                     <div className="right">
                       <button
@@ -352,8 +362,14 @@ const ProfileDetails = () => {
                   </div>
                   <div className="content">
                     <div className="left">
-                      <span>{profileDetails?.functionalArea}</span> <br />
-                      {profileDetails?.educationDetails?.pgQualification}
+                      {profileDetails?.academicsEducation?.map((emp) => {
+                        return (
+                          <>
+                            <p>{emp?.institution}</p>
+                            <p>{emp?.city} </p>
+                          </>
+                        );
+                      })}
                     </div>
                     <div className="right">
                       <button
@@ -403,11 +419,22 @@ const ProfileDetails = () => {
                       {/* <p>
                       Veer Bahadur Singh Purvanchal University Jaunpur - Jaunpur
                     </p> */}
+                    {profileDetails?.projects?.map((emp) => {
+                      return (
+                        <>
+                          <p> Project Name: {emp?.projectName}</p>
+
+                          <p>Project Description: {""} <span>{emp?.description}</span></p>
+                          <p> Project Url: {""}<span>{emp?.projectUrl}</span></p>
+                        </>
+                      );
+                    })}
                     </div>
-                    {/* <div className="right">
+                    <div className="right">
                     <img src={IconDelete} alt="" />
                     <img src={iconEdit} alt="" />
-                  </div> */}
+                  </div>
+                    
                   </div>
                 </div>
 
@@ -557,11 +584,13 @@ const ProfileDetails = () => {
         isConfirm={isEducation}
         closeConfirm={handleEducation}
         setEducationData={handleEducationData}
+        getDetails={getProfileDetails}
       />
       <ExperienceModal
         isConfirm={isExperience}
         closeConfirm={handleExperience}
         setExperienceData={handleExperienceData}
+        getDetails={getProfileDetails}
       />
       <ProjectModal
         isConfirm={isProject}

@@ -1661,7 +1661,7 @@ const Profile = () => {
                               <ul>
                                 <li>
                                   <span>Experience:</span> {val.currentCompany}{" "}
-                                  {val.currentDesignation}
+                                  {val.workExperie}
                                 </li>
                                 <li>
                                   <span>Current Designation: </span>{" "}
@@ -1671,14 +1671,20 @@ const Profile = () => {
                                   <span>Current Company: </span>{" "}
                                   {val.currentCompany}
                                 </li>
-                                <li>
-                                  <span>Previous Designation: </span> Sr.
-                                  Software Developer
+                                {/* <li>
+                                   <span>Previous Designation: </span>
+                                  {val?.experience?.map((emp) => {
+                                    return (
+                                      <>
+                                        <p>{emp?.companyName}</p>
+                                      </>
+                                    );
+                                  })}
                                 </li>
                                 <li>
                                   <span>Previous Company:</span> Sr. Software
                                   Developer
-                                </li>
+                                </li> */}
                                 <li>
                                   <span>Functional Area:</span>{" "}
                                   {val.functionalArea}
@@ -1686,6 +1692,10 @@ const Profile = () => {
                                 <li>
                                   <span>Industry:</span>
                                   {val.industry}
+                                </li>
+                                <li>
+                                  <span>Qualification : </span>{" "}
+                                  {val.qualification}
                                 </li>
                               </ul>
                             </Col>
@@ -1693,55 +1703,50 @@ const Profile = () => {
                             <Col lg={6} md={6}>
                               <ul>
                                 <li>
-                                  <span>Experience:</span>{" "}
-                                  {val.workExperience.years} Year(s){" "}
-                                  {val.workExperience.months} Month (s)
+                                  <span>Current Location:</span>{" "}
+                                  {val.currentCity} Year(s){" "}
                                 </li>
                                 <li>
-                                  <span>Current Designation: </span>{" "}
-                                  {val.currentDesignation}
+                                  <span> Preferred Location: </span>{" "}
+                                  {val.preferredCity}
+                                </li>
+
+                                <li>
+                                  <span>Phone Number </span> Sr.
+                                  {val.phone}
                                 </li>
                                 <li>
-                                  <span>Current Company: </span>{" "}
-                                  {val.currentCompany}
+                                  <span>Email:</span> Sr. Software
+                                  {val.email}
                                 </li>
                                 <li>
-                                  <span>Previous Designation: </span> Sr.
-                                  Software Developer
+                                  <span>Comment:</span> {val.comment}
                                 </li>
                                 <li>
-                                  <span>Previous Company:</span> Sr. Software
-                                  Developer
-                                </li>
-                                <li>
-                                  <span>Functional Area:</span>{" "}
-                                  {val.functionalArea}
-                                </li>
-                                <li>
-                                  <span>Industry:</span>
-                                  {val.industry}
+                                  {/* <span>I:</span>
+                                  {val.industry} */}
                                 </li>
                               </ul>
                             </Col>
                             <ul className="ps-3">
                               <li>
-                                <span>Key Skills:</span> Coordination, Back
-                                Office Support, Recruitment, Public Relations
+                                <span>Key Skills: {val.keySkills}</span> 
                               </li>
                             </ul>
 
                             <div className="applied">
                               <ul className="ps-3">
                                 <li>
-                                  <span>Applied on:</span> 30th July 22
+                                  <span>Applied on:</span> {val.appliedDate.substring(0, 10)}
                                 </li>
                                 <li>|</li>
                                 <li>
-                                  <span>Applied on:</span> 30th July 22
+                                  <span>Active:</span>
+                                  {val.lastActive.substring(0, 10)}
                                 </li>
                                 <li>|</li>
                                 <li>
-                                  <span>Applied on:</span> 30th July 22
+                                  <span>Modified:</span> {val.lastActive.substring(0, 10)}
                                 </li>
                               </ul>
                             </div>

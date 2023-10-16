@@ -56,44 +56,36 @@ const ProjectModal = ({ isConfirm, closeConfirm, setProjectData }) => {
       <Modal.Body>
         <Form>
           <Form.Group className="mb-3" as={Col} controlId="formGridText">
-            <Form.Label>College Name </Form.Label>
+            <Form.Label>Project Name </Form.Label>
             <Form.Control
               type="text"
-              placeholder="College Name "
+              placeholder="Enter Project Name "
               value={collegeName}
               onChange={(e) => setCollegeName(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group className="mb-3" as={Col} controlId="formGridText">
-            <Form.Label>Course</Form.Label>
+            <Form.Label> Project Description</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Course"
+              placeholder=" Enter Project Description"
               value={course}
               onChange={(e) => setCourse(e.target.value)}
             />
           </Form.Group>
 
           <Form.Group className="mb-3" as={Col} controlId="formGridText">
-            <Form.Label>Year</Form.Label>
+            <Form.Label> Project URL</Form.Label>
             <Form.Control
               type="text"
-              placeholder="year "
+              placeholder=" Enter Project URL "
               value={year}
               onChange={(e) => setYear(e.target.value)}
             />
           </Form.Group>
 
-          <Form.Group className="mb-3" as={Col} controlId="formGridText">
-            <Form.Label>City</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="City"
-              value={city}
-              onChange={(e) => setCity(e.target.value)}
-            />
-          </Form.Group>
+          
         </Form>
       </Modal.Body>
       <Modal.Footer>

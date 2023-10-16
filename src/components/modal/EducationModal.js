@@ -9,7 +9,12 @@ import Select from "react-select";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
-const EducationModal = ({ isConfirm, closeConfirm, setEducationData }) => {
+const EducationModal = ({
+  isConfirm,
+  closeConfirm,
+  setEducationData,
+  getDetails,
+}) => {
   const navigate = useNavigate();
   const [collegeName, setCollegeName] = useState("");
   const [validated, setValidated] = useState(false);
@@ -18,6 +23,8 @@ const EducationModal = ({ isConfirm, closeConfirm, setEducationData }) => {
   const [city, setCity] = useState("");
 
   const [formData, setFormData] = useState({
+    institution: "",
+    city: "",
     companyName: "",
     position: "",
     startDate: "",
@@ -37,12 +44,12 @@ const EducationModal = ({ isConfirm, closeConfirm, setEducationData }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Pass the form data to the parent component
-    // setExperienceData(formData);
+    setEducationData(formData);
     // Close the modal
     closeConfirm();
   };
 
-  const { currentCity, course, joiningDate } = formData;
+  const {institution, currentCity, course, joiningDate } = formData;
   const location = useLocation();
   const { profileID } = location.state !== null && location.state;
   // const handleSaveChanges = async () => {
@@ -93,19 +100,19 @@ const EducationModal = ({ isConfirm, closeConfirm, setEducationData }) => {
         debugger;
 
         const {
-          fullName,
+          institution,
 
-          currentDesignation,
+          course,
 
-          currentCompany,
+         
         } = response.data.data;
         setFormData({
           ...formData,
-          fullName: fullName,
+          institution: institution,
 
-          currentDesignation: currentDesignation,
+          course: course,
 
-          currentCompany: currentCompany,
+          
         });
         // console.log(getKeyByValue(response.data.data,formData),'Keysss')
       }
@@ -123,8 +130,8 @@ const EducationModal = ({ isConfirm, closeConfirm, setEducationData }) => {
       event.stopPropagation();
     } else {
       try {
-        const response = await apiBase.put(
-          `profile/update/${profileID}`,
+        const response = await apiBase.post(
+          `profile/academicsEducation-add/${profileID}`,
           formData,
           {
             headers: {
@@ -134,7 +141,9 @@ const EducationModal = ({ isConfirm, closeConfirm, setEducationData }) => {
         );
         if (response.status === 200) {
           // history('/profile');
-          navigate("/profile");
+          // navigate("/profile");
+          getDetails(profileID);
+          closeConfirm();
         }
 
         setValidated(false);
@@ -145,14 +154,14 @@ const EducationModal = ({ isConfirm, closeConfirm, setEducationData }) => {
 
     setValidated(true);
   };
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
 
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
 
   return (
     <Modal
@@ -170,32 +179,61 @@ const EducationModal = ({ isConfirm, closeConfirm, setEducationData }) => {
         <Form>
           <Form.Group className="mb-3" as={Col} controlId="formGridText">
             <Form.Label>College Name </Form.Label>
-            <Form.Control
+
+            <textarea
               type="text"
+              required
+              className="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
               placeholder="College Name "
-              value={collegeName}
-              onChange={(e) => setCollegeName(e.target.value)}
+              onResize={false}
+              name="institution"
+              value={institution}
+              onChange={handleInputChange}
+              // onChange={(e) => setCollegeName(e.target.value)}
             />
+            {/* <Form.Control
+              type="text"
+              placeholder="year "
+              value={year}
+              onChange={(e) => setCollegeName(e.target.value)}
+            /> */}
           </Form.Group>
 
           <Form.Group className="mb-3" as={Col} controlId="formGridText">
             <Form.Label>Course</Form.Label>
-            <Select
+            {/* <Select 
+            type="text"
               className="select"
               options={OptionsLists.optionList("degree")}
               placeholder="  Select Course"
               name="course"
+        
               value={OptionsLists.optionList("degree").filter(function (
                 option
               ) {
                 return option.value === course;
               })}
-              onChange={(selectedOption) =>
+               onChange={(selectedOption) =>
                 setFormData((prevFormData) => ({
                   ...prevFormData,
                   course: selectedOption.value,
                 }))
               }
+            /> */}
+                <textarea
+              type="text"
+              required
+              className="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              placeholder="College Name "
+              onResize={false}
+              name="course"
+              value={course}
+              onChange={handleInputChange}
+              // onChange={(e) => setCollegeName(e.target.value)}
             />
           </Form.Group>
 

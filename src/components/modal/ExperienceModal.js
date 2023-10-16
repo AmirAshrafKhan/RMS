@@ -9,7 +9,12 @@ import Select from "react-select";
 import { apiBase } from "apiBase";
 import { useNavigate, useLocation } from "react-router-dom";
 
-const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
+const ExperienceModal = ({
+  isConfirm,
+  closeConfirm,
+  setExperienceData,
+  getDetails,
+}) => {
   const navigate = useNavigate();
   const [updateProfile, setUpdateProfile] = useState(false);
   const [validated, setValidated] = useState(false);
@@ -23,7 +28,7 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
   const {
     fullName,
     jobDescription,
-    currentDesignation,
+    position,
 
     currentCompany,
 
@@ -40,6 +45,7 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
   const { profileID } = location.state !== null && location.state;
 
   const handleInputChange = (e) => {
+   
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -48,6 +54,7 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
   };
 
   const handleCheckboxChange = () => {
+  
     setFormData((prevFormData) => ({
       ...prevFormData,
       isCurrent: !prevFormData.isCurrent,
@@ -56,6 +63,7 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    debugger;
     // Pass the form data to the parent component
     setExperienceData(formData);
     // Close the modal
@@ -90,12 +98,17 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
         });
         // console.log(getKeyByValue(response.data.data,formData),'Keysss')
       }
+      closeConfirm();
     } catch (error) {
       debugger;
       console.log(error);
     }
   };
-
+  const handleDropDown = (data) => {
+    let { value } = data;
+    debugger;
+    setFormData({ ...formData, position: value });
+  };
   const handleUpdate = async (event) => {
     console.log(formData, "formData expere");
     event.preventDefault();
@@ -103,9 +116,10 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
+      debugger;
       try {
-        const response = await apiBase.put(
-          `profile/update/${profileID}`,
+        const response = await apiBase.post(
+          `profile/add-experience/${profileID}`,
           formData,
           {
             headers: {
@@ -115,7 +129,9 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
         );
         if (response.status === 200) {
           // history('/profile');
-          navigate("/profile");
+          // navigate("/profile");
+          getDetails(profileID);
+          closeConfirm();
         }
 
         setValidated(false);
@@ -126,14 +142,14 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
 
     setValidated(true);
   };
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
 
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
 
   console.log(formData);
 
@@ -159,9 +175,9 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
               rows="3"
               placeholder="Enter a description About your company"
               onResize={false}
-              name="currentCompany"
-              value={currentCompany}
-              onChange={handleChange}
+              name="companyName"
+              value={formData.companyName}
+              onChange={handleInputChange}
             />
           </Form.Group>
 
@@ -171,18 +187,16 @@ const ExperienceModal = ({ isConfirm, closeConfirm, setExperienceData }) => {
               className="select"
               options={OptionsLists.optionList("jobCategorization")}
               placeholder=" Search & select designation"
-              name="currentDesignation"
+              name="position"
+              // onChange={handleInputChange}
+
               value={OptionsLists.optionList("jobCategorization").filter(
                 function (option) {
-                  return option.value === currentDesignation;
+                  return option.value === formData.position;
                 }
               )}
-              onChange={(selectedOption) =>
-                setFormData((prevFormData) => ({
-                  ...prevFormData,
-                  currentDesignation: selectedOption.value,
-                }))
-              }
+              // defaultValue={formData?.currentDesignation}
+              onChange={handleDropDown}
             />
           </Form.Group>
 
