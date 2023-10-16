@@ -1,4 +1,4 @@
-[
+const Cities = [
     {
         "id": "1",
         "name": "Mumbai",
@@ -6105,3 +6105,5 @@
        "state":"Assam"
     }
 ]
+
+export default  Cities;

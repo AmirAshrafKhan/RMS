@@ -10,6 +10,7 @@ import axios from "axios";
 import OptionsLists from "OptionsLists";
 import { useLocation, useNavigate } from "react-router-dom";
 import { apiBase } from "apiBase";
+import Cities from "./Cities";
 
 const AddProfile = () => {
   const navigate = useNavigate();
@@ -224,6 +225,11 @@ const AddProfile = () => {
     { value: "vanilla", label: "Vanilla" },
   ];
   // consoles
+
+  const cityOptions = Cities.map((city) => ({
+    value: city.id,
+    label: `${city.name}, ${city.state}`,
+  }));
 
   return (
     <>
@@ -480,22 +486,8 @@ const AddProfile = () => {
                     <Form.Label>Current City</Form.Label>
                     <Select
                       className="select"
-                      options={OptionsLists.optionList("jobLocation")}
-                      placeholder="Search & select city "
-                      value={OptionsLists.optionList("jobLocation").filter(
-                        function (option) {
-                          return option.value === currentCity;
-                        }
-                      )}
-                      // {...CityList.name.map((result) => (
-                      //   <options text={result?.id}>{result?.name}</options>
-                      // ))}
-                      onChange={(selectedOption) =>
-                        setFormData((prevFormData) => ({
-                          ...prevFormData,
-                          currentCity: selectedOption.value,
-                        }))
-                      }
+                      options={cityOptions}
+                      placeholder="Select a city"
                     />
                   </Col>
 
@@ -555,20 +547,8 @@ const AddProfile = () => {
                     <Form.Label>Prefered City</Form.Label>
                     <Select
                       className="select"
-                      options={OptionsLists.optionList("jobLocation")}
-                      placeholder="Search & select city  "
-                      name="preferredCity"
-                      value={OptionsLists.optionList("jobLocation").filter(
-                        function (option) {
-                          return option.value === preferredCity;
-                        }
-                      )}
-                      onChange={(selectedOption) =>
-                        setFormData((prevFormData) => ({
-                          ...prevFormData,
-                          preferredCity: selectedOption.value,
-                        }))
-                      }
+                      options={cityOptions}
+                      placeholder="Select a city"
                     />
                   </Col>
 
