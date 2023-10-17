@@ -104,11 +104,14 @@ const ExperienceModal = ({
       console.log(error);
     }
   };
+
   const handleDropDown = (data) => {
     let { value } = data;
     debugger;
     setFormData({ ...formData, position: value });
   };
+
+
   const handleUpdate = async (event) => {
     console.log(formData, "formData expere");
     event.preventDefault();
@@ -116,7 +119,7 @@ const ExperienceModal = ({
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-      debugger;
+     
       try {
         const response = await apiBase.post(
           `profile/add-experience/${profileID}`,

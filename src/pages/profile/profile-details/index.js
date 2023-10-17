@@ -201,7 +201,7 @@ const ProfileDetails = () => {
                   <div className="edit-image">
                     <Link
                       to={allRoutes.addProfilePopup}
-                      state={{ profileID: profileDetails._id }}
+                      state={{ profileID: profileDetails?._id }}
                       className="icon-hover"
                     >
                       <img src={iconEdit} alt="" />
@@ -259,7 +259,7 @@ const ProfileDetails = () => {
 
                           <li>
                             <span>Education:</span>
-                            {profileDetails.industry}
+                            {profileDetails?.industry}
                           </li>
                           <li>
                             <span>Phone No. :</span>
@@ -276,7 +276,7 @@ const ProfileDetails = () => {
                       <ul>
                         <li className="mt-2">
                           <span>Key Skills:</span>
-                          {profileDetails.keySkills}
+                          {profileDetails?.keySkills}
                         </li>
                       </ul>
                     </div>
@@ -285,15 +285,18 @@ const ProfileDetails = () => {
                   <div className="applied">
                     <ul>
                       <li>
-                        <span>Applied on:</span> {profileDetails?.joiningDate?.substring(0, 10)}
+                        <span>Applied on:</span>{" "}
+                        {profileDetails?.joiningDate?.substring(0, 10)}
                       </li>
                       <li>|</li>
                       <li>
-                        <span>Active:</span> {profileDetails?.lastModified?.substring(0, 10)}
+                        <span>Active:</span>{" "}
+                        {profileDetails?.lastModified?.substring(0, 10)}
                       </li>
                       <li>|</li>
                       <li>
-                        <span>Modified:</span> {profileDetails?.lastModified?.substring(0, 10)}
+                        <span>Modified:</span>{" "}
+                        {profileDetails?.lastModified?.substring(0, 10)}
                       </li>
                     </ul>
                   </div>
@@ -419,22 +422,28 @@ const ProfileDetails = () => {
                       {/* <p>
                       Veer Bahadur Singh Purvanchal University Jaunpur - Jaunpur
                     </p> */}
-                    {profileDetails?.projects?.map((emp) => {
-                      return (
-                        <>
-                          <p> Project Name: {emp?.projectName}</p>
+                      {profileDetails?.projects?.map((emp) => {
+                        return (
+                          <>
+                            <p> Project Name: {emp?.projectName}</p>
 
-                          <p>Project Description: {""} <span>{emp?.description}</span></p>
-                          <p> Project Url: {""}<span>{emp?.projectUrl}</span></p>
-                        </>
-                      );
-                    })}
+                            <p>
+                              Project Description: {""}{" "}
+                              <span>{emp?.description}</span>
+                            </p>
+                            <p>
+                              {" "}
+                              Project Url: {""}
+                              <span>{emp?.projectUrl}</span>
+                            </p>
+                          </>
+                        );
+                      })}
                     </div>
                     <div className="right">
-                    <img src={IconDelete} alt="" />
-                    <img src={iconEdit} alt="" />
-                  </div>
-                    
+                      <img src={IconDelete} alt="" />
+                      <img src={iconEdit} alt="" />
+                    </div>
                   </div>
                 </div>
 
@@ -596,8 +605,9 @@ const ProfileDetails = () => {
         isConfirm={isProject}
         closeConfirm={handleProject}
         setIsProjectData={handleProjectData}
+        getDetails={getProfileDetails}
       />
-      <ProjectModal isConfirm={isProject} closeConfirm={handleProject} />
+      {/* <ProjectModal isConfirm={isProject} closeConfirm={handleProject} /> */}
       <CommonModal isConfirm={isSummary} closeConfirm={handleSummary} />
       <CommonModal isConfirm={isWork} closeConfirm={handleWork} />
 
