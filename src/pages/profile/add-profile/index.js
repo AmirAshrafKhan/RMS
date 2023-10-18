@@ -720,55 +720,65 @@ const AddProfile = () => {
 
                   <Col className="desktop" lg={6} md={6}>
                     <Form.Label>Joining Date</Form.Label>
-                    <Select
+                    <Form.Control
                       type="date"
-                      className="select"
-                      options={OptionsLists.optionList("Date")}
-                      placeholder="  select joining Date"
-                      value={OptionsLists.optionList("Date").filter(function (
-                        option
-                      ) {
-                        return option.value === joiningDate;
-                      })}
-                      onChange={(selectedOption) =>
-                        setFormData((prevFormData) => ({
-                          ...prevFormData,
-                          joiningDate: selectedOption.value,
-                        }))
-                      }
-
-                    
-                      // // max="2030-12-31"
-                      // name="joiningDate"
-                      // value={joiningDate}
-                      // onChange={(e) => {
+                      // className="select"
+                      // options={OptionsLists.optionList("Date")}
+                      // placeholder="  select joining Date"
+                      // value={OptionsLists.optionList("Date").filter(function (
+                      //   option
+                      // ) {
+                      //   return option.value === joiningDate;
+                      // })}
+                      // onChange={(selectedOption) =>
                       //   setFormData((prevFormData) => ({
                       //     ...prevFormData,
-                      //     joiningDate: e.target.value,
-                      //   }));
-                      // }}
+                      //     joiningDate: selectedOption.value,
+                      //   }))
+                      // }
+
+                    
+                       max="2030-12-31"
+                      name="joiningDate"
+                      value={joiningDate}
+                      onChange={(e) => {
+                        setFormData((prevFormData) => ({
+                          ...prevFormData,
+                          joiningDate: e.target.value,
+                        }));
+                      }}
                     />
                   </Col>
 
                   <Col className="desktop" lg={6} md={6}>
                     <Form.Label>Last Modified</Form.Label>
-                    <Select
+                    <Form.Control
                       type="date"
-                      className="select"
-                      options={OptionsLists.optionList("Date")}
-                      placeholder="  select last Modified Date"
-                      name="lastModified"
-                      value={OptionsLists.optionList("Date").filter(function (
-                        option
-                      ) {
-                        return option.value === lastModified;
-                      })}
-                      onChange={(selectedOption) =>
+                      // className="select"
+                      // options={OptionsLists.optionList("Date")}
+                      // placeholder="  select last Modified Date"
+                      // name="lastModified"
+                      // value={OptionsLists.optionList("Date").filter(function (
+                      //   option
+                      // ) {
+                      //   return option.value === lastModified;
+                      // })}
+                      // onChange={(selectedOption) =>
+                      //   setFormData((prevFormData) => ({
+                      //     ...prevFormData,
+                      //     lastModified: selectedOption.value,
+                      //   }))
+                      // }
+                      
+                      max="2030-12-31"
+                      name="joiningDate"
+                      value={joiningDate}
+                      onChange={(e) => {
                         setFormData((prevFormData) => ({
                           ...prevFormData,
-                          lastModified: selectedOption.value,
-                        }))
-                      }
+                          joiningDate: e.target.value,
+                        }));
+                      }}
                     />
                   </Col>
 

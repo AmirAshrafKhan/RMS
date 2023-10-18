@@ -331,8 +331,8 @@ const ProfileDetails = () => {
                               <span>{emp?.companyName}</span>
                             </h4>
                             <p>
-                              {emp?.position} | {emp?.startDate}{" "}
-                              {emp?.endDate ? "To" + emp?.endDate : null}{" "}
+                              {emp?.position} | {emp?.startDate?.substring(0, 10)}{" "}
+                              {emp?.endDate?.substring(0, 10) ? "To"   + emp?.endDate.substring(0, 10) : null}{" "}
                             </p>
                           </>
                         );
