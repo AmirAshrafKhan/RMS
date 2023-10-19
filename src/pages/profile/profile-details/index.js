@@ -438,15 +438,24 @@ const ProfileDetails = (closeConfirm) => {
                       {profileDetails?.experience?.map((emp) => {
                         return (
                           <>
-                            <div className="right" style={{ display: "flex" }}>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignitems: "center",
+                                gap: "600px",
+                              }}
+                            >
                               <div>
                                 <span>{emp?.companyName}</span>
                               </div>
-                              <div>
+                              <div style={{ display: "flex" }}>
                                 <button
                                   className="icon-hover"
                                   // onClick={handleDelete1}
-                                  onClick={() => handleDeleteExperience(emp._id)}
+                                  onClick={() =>
+                                    handleDeleteExperience(emp._id)
+                                  }
                                   // href="/"
                                 >
                                   <img src={IconDelete} alt="" />
@@ -503,27 +512,37 @@ const ProfileDetails = (closeConfirm) => {
                       {profileDetails?.academicsEducation?.map((emp) => {
                         return (
                           <>
-                            <h4 className="right">
-                              <p>{emp?.institution}</p>
+                            <div
+                              className="right"
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignitems: "center",
+                                gap: "600px",
+                              }}
+                            >
+                              <div>
+                                <p>{emp?.institution}</p>
+                                <p>{emp?.city} </p>
+                              </div>
+                              <div style={{ display: "flex" }}>
+                                <button
+                                  className="icon-hover"
+                                  onClick={() => handleDeleteEducation(emp._id)}
+                                  href="/"
+                                >
+                                  <img src={IconDelete} alt="" />
+                                </button>
 
-                              <button
-                                className="icon-hover"
-                               onClick={() => handleDeleteEducation(emp._id)}
-                                href="/"
-
-                              >
-                                <img src={IconDelete} alt="" />
-                              </button>
-
-                              <button
-                                className="icon-hover"
-                                // onClick={handleAcademics}
-                                href="/"
-                              >
-                                <img src={iconEdit} alt="" />
-                              </button>
-                            </h4>
-                            <p>{emp?.city} </p>
+                                <button
+                                  className="icon-hover"
+                                  // onClick={handleAcademics}
+                                  href="/"
+                                >
+                                  <img src={iconEdit} alt="" />
+                                </button>
+                              </div>
+                            </div>
                           </>
                         );
                       })}
@@ -579,33 +598,43 @@ const ProfileDetails = (closeConfirm) => {
                       {profileDetails?.projects?.map((emp) => {
                         return (
                           <>
-                            <p> Project Name: {emp?.projectName}</p>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                alignitems: "center",
+                                gap: "550px",
+                              }}
+                            >
+                              <div>
+                                <p> Project Name: {emp?.projectName}</p>
 
-                            <p>
-                              Project Description: {""}{" "}
-                              <span>{emp?.description}</span>
-                            </p>
-                            <p>
-                              {" "}
-                              Project Url: {""}
-                              <span>{emp?.projectUrl}</span>
-                            </p>
-                            <div className="left ">
-                              <button
-                                className="icon-hover"
-                                onClick={() => handleDeleteProjects(emp._id)}
-                                href="/"
-                              >
-                                <img src={IconDelete} alt="" />
-                              </button>
+                                <p>
+                                  Project Description: {""} : {emp?.description}
+                                </p>
+                                <p>
+                                  {" "}
+                                  Project Url: {""}
+                                  {emp?.projectUrl}
+                                </p>
+                              </div>
+                              <div style={{ display: "flex" }}>
+                                <button
+                                  className="icon-hover"
+                                  onClick={() => handleDeleteProjects(emp._id)}
+                                  href="/"
+                                >
+                                  <img src={IconDelete} alt="" />
+                                </button>
 
-                              <button
-                                className="icon-hover"
-                                // onClick={handleAcademics}
-                                href="/"
-                              >
-                                <img src={iconEdit} alt="" />
-                              </button>
+                                <button
+                                  className="icon-hover"
+                                  // onClick={handleAcademics}
+                                  href="/"
+                                >
+                                  <img src={iconEdit} alt="" />
+                                </button>
+                              </div>
                             </div>
                           </>
                         );
