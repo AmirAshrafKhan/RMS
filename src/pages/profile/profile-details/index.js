@@ -449,7 +449,12 @@ const ProfileDetails = (closeConfirm) => {
                               <div>
                                 <span>{emp?.companyName}</span>
                               </div>
-                              <div style={{ display: "flex" }}>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  justifycontent: "flex-end",
+                                }}
+                              >
                                 <button
                                   className="icon-hover"
                                   // onClick={handleDelete1}
@@ -521,11 +526,25 @@ const ProfileDetails = (closeConfirm) => {
                                 gap: "600px",
                               }}
                             >
-                              <div>
+                              <div
+                                style={{
+                                  width: "50%",
+                                  whitespace: "nowrap",
+                                  overflow: "hidden",
+                                  textoverflow: "ellipsis",
+                                }}
+                              >
                                 <p>{emp?.institution}</p>
                                 <p>{emp?.city} </p>
                               </div>
-                              <div style={{ display: "flex" }}>
+                              <div
+                                style={{
+                                  width: "50%",
+                                  display: "flex",
+                                  justifycontent: "flex-end",
+                                  gap: "10px",
+                                }}
+                              >
                                 <button
                                   className="icon-hover"
                                   onClick={() => handleDeleteEducation(emp._id)}
@@ -603,14 +622,21 @@ const ProfileDetails = (closeConfirm) => {
                                 display: "flex",
                                 justifyContent: "space-between",
                                 alignitems: "center",
-                                gap: "550px",
+                                gap: "600px",
                               }}
                             >
-                              <div>
+                              <div
+                                style={{
+                                  width: "50%",
+                                  whitespace: "nowrap",
+                                  overflow: "hidden",
+                                  textoverflow: "ellipsis",
+                                }}
+                              >
                                 <p> Project Name: {emp?.projectName}</p>
 
                                 <p>
-                                  Project Description: {""} : {emp?.description}
+                                  Project Description: {""}  {emp?.description}
                                 </p>
                                 <p>
                                   {" "}
@@ -618,7 +644,14 @@ const ProfileDetails = (closeConfirm) => {
                                   {emp?.projectUrl}
                                 </p>
                               </div>
-                              <div style={{ display: "flex" }}>
+                              <div
+                               style={{
+                                width: "50%",
+                                display: "flex",
+                                justifycontent: "flex-end",
+                                gap: "10px",
+                              }}
+                              >
                                 <button
                                   className="icon-hover"
                                   onClick={() => handleDeleteProjects(emp._id)}
