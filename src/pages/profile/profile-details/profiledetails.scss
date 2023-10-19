@@ -225,12 +225,16 @@
         .content {
           display: flex;
           justify-content: space-between;
+          // justify-content: right;
           align-items: center;
           padding: 20px 0px 10px;
           border-top: 2px solid $grey-200;
           margin-top: 15px;
 
           .left {
+     
+
+       
             h4 {
               color: $grey-900;
               font-family: "Inter";
@@ -246,20 +250,32 @@
               font-family: "Inter";
               font-weight: 400;
             }
-          }
-
-          .right {
-            img {
-              width: 20px;
-              height: auto;
-              cursor: pointer;
-              margin-right: 30px;
-
-              &:last-child {
-                margin-right: 0px;
+            .right {
+              img {
+                width: 20px;
+                height: auto;
+                cursor: pointer;
+                margin-right: 30px;
+  
+                &:last-child {
+                  margin-right: 0px;
+                }
               }
             }
           }
+
+          // .right {
+          //   img {
+          //     width: 20px;
+          //     height: auto;
+          //     cursor: pointer;
+          //     margin-right: 30px;
+
+          //     &:last-child {
+          //       margin-right: 0px;
+          //     }
+          //   }
+          // }
         }
       }
 

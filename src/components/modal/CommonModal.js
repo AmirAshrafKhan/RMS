@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Col, Form, Modal } from "react-bootstrap";
 import CommonButton from "components/common-button";
+
+
 const CommonModal = ({ isConfirm, closeConfirm }) => {
   const [validated, setValidated] = useState(false);
 

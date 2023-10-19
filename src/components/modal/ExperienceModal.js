@@ -14,6 +14,7 @@ const ExperienceModal = ({
   closeConfirm,
   setExperienceData,
   getDetails,
+  eid,
 }) => {
   const navigate = useNavigate();
   const [updateProfile, setUpdateProfile] = useState(false);
@@ -45,7 +46,6 @@ const ExperienceModal = ({
   const { profileID } = location.state !== null && location.state;
 
   const handleInputChange = (e) => {
-   
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -54,7 +54,6 @@ const ExperienceModal = ({
   };
 
   const handleCheckboxChange = () => {
-  
     setFormData((prevFormData) => ({
       ...prevFormData,
       isCurrent: !prevFormData.isCurrent,
@@ -111,7 +110,6 @@ const ExperienceModal = ({
     setFormData({ ...formData, position: value });
   };
 
-
   const handleUpdate = async (event) => {
     console.log(formData, "formData expere");
     event.preventDefault();
@@ -119,25 +117,44 @@ const ExperienceModal = ({
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-     
       try {
-        const response = await apiBase.post(
-          `profile/add-experience/${profileID}`,
-          formData,
-          {
-            headers: {
-              Authorization: localStorage.getItem("token"),
-            },
+        if (eid) {
+          const response = await apiBase.put(
+            `profile/${profileID}/experience-edit/${eid}`,
+            formData,
+            {
+              headers: {
+                Authorization: localStorage.getItem("token"),
+              },
+            }
+          );
+          if (response.status === 200) {
+            // history('/profile');
+            // navigate("/profile");
+            getDetails(profileID);
+            closeConfirm();
           }
-        );
-        if (response.status === 200) {
-          // history('/profile');
-          // navigate("/profile");
-          getDetails(profileID);
-          closeConfirm();
-        }
 
-        setValidated(false);
+          setValidated(false);
+        } else {
+          const response = await apiBase.post(
+            `profile/add-experience/${profileID}`,
+            formData,
+            {
+              headers: {
+                Authorization: localStorage.getItem("token"),
+              },
+            }
+          );
+          if (response.status === 200) {
+            // history('/profile');
+            // navigate("/profile");
+            getDetails(profileID);
+            closeConfirm();
+          }
+
+          setValidated(false);
+        }
       } catch (error) {
         console.log(error);
       }

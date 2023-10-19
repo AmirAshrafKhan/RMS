@@ -23,8 +23,9 @@ import { apiBase } from "apiBase";
 // import AddprofilePopup from "pages/addprofile-popup";
 import axios from "axios";
 
-const ProfileDetails = () => {
+const ProfileDetails = (closeConfirm) => {
   const [profileDetails, setProfileDetails] = useState({});
+  const [eid, setid] = useState("");
   const [isEducation, setIsEducation] = useState(false);
   const [isExperience, setIsExperience] = useState(false);
   const [isProject, setIsProject] = useState(false);
@@ -33,6 +34,15 @@ const ProfileDetails = () => {
   const [summary, setsummary] = useState("");
   const location = useLocation();
   const { profileID } = location.state !== null && location.state;
+  const [validated, setValidated] = useState(false);
+
+  const [formData, setFormData] = useState({
+    companyName: "",
+    position: "",
+    startDate: "",
+    endDate: "",
+    isCurrent: false,
+  });
 
   useEffect(() => {
     console.log(profileID, "profileID");
@@ -78,6 +88,104 @@ const ProfileDetails = () => {
       console.error("Error adding work experience:", error);
     }
   };
+
+  const handleDeleteExperience = async (id) => {
+    console.log(formData, "formData expere");
+
+    try {
+      const response = await apiBase.delete(
+        `profile/${profileID}/experience-delete/${id}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+      if (response.status === 200) {
+        // history('/profile');
+        // navigate("/profile");
+        // getDetails(profileID);
+        getProfileDetails(profileID);
+
+        closeConfirm();
+      }
+
+      setValidated(false);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setValidated(true);
+  };
+
+  const handleDeleteEducation = async (id) => {
+    console.log(formData, "formData expere");
+
+    try {
+      const response = await apiBase.delete(
+        `profile/${profileID}/academicsEducation-delete/${id}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+      if (response.status === 200) {
+        // history('/profile');
+        // navigate("/profile");
+        // getDetails(profileID);
+        getProfileDetails(profileID);
+
+        closeConfirm();
+      }
+
+      setValidated(false);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setValidated(true);
+  };
+
+  const handleDeleteProjects = async (id) => {
+    console.log(formData, "formData expere");
+
+    try {
+      const response = await apiBase.delete(
+        `profile/${profileID}/project-delete/${id}`,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+      if (response.status === 200) {
+        // history('/profile');
+        // navigate("/profile");
+        // getDetails(profileID);
+        getProfileDetails(profileID);
+
+        closeConfirm();
+      }
+
+      setValidated(false);
+    } catch (error) {
+      console.log(error);
+    }
+
+    setValidated(true);
+  };
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+
+  //   setFormData((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
+
+  console.log(formData);
+
   // education data
   const handleEducationData = async (formData) => {
     try {
@@ -127,8 +235,11 @@ const ProfileDetails = () => {
   function handleEducation() {
     setIsEducation(!isEducation);
   }
-  function handleExperience() {
+  function handleExperience(id) {
     debugger;
+    setid(id);
+    // setid(eid);
+    //setid{}
     setIsExperience(!isExperience);
   }
   function handleProject() {
@@ -327,34 +438,58 @@ const ProfileDetails = () => {
                       {profileDetails?.experience?.map((emp) => {
                         return (
                           <>
-                            <h4>
-                              <span>{emp?.companyName}</span>
-                            </h4>
+                            <div className="right" style={{ display: "flex" }}>
+                              <div>
+                                <span>{emp?.companyName}</span>
+                              </div>
+                              <div>
+                                <button
+                                  className="icon-hover"
+                                  // onClick={handleDelete1}
+                                  onClick={() => handleDeleteExperience(emp._id)}
+                                  // href="/"
+                                >
+                                  <img src={IconDelete} alt="" />
+                                </button>
+
+                                <button
+                                  className="icon-hover"
+                                  // onClick={handleWork}
+                                  href="/"
+                                  onClick={() => handleExperience(emp._id)}
+                                >
+                                  <img src={iconEdit} alt="" />
+                                </button>
+                              </div>
+                            </div>
                             <p>
-                              {emp?.position} | {emp?.startDate?.substring(0, 10)}{" "}
-                              {emp?.endDate?.substring(0, 10) ? "To"   + emp?.endDate.substring(0, 10) : null}{" "}
+                              {emp?.position} |{" "}
+                              {emp?.startDate?.substring(0, 10)}{" "}
+                              {emp?.endDate?.substring(0, 10)
+                                ? "To" + emp?.endDate.substring(0, 10)
+                                : null}{" "}
                             </p>
                           </>
                         );
                       })}
                     </div>
-                    <div className="right">
+                    {/*<div className="right">
                       <button
                         className="icon-hover"
-                        onClick={handleDelete1}
-                        href="/"
+                        // onClick={handleDelete1}
+                        // href="/"
                       >
                         <img src={IconDelete} alt="" />
                       </button>
 
                       <button
                         className="icon-hover"
-                        onClick={handleWork}
+                        // onClick={handleWork}
                         href="/"
                       >
                         <img src={iconEdit} alt="" />
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
@@ -368,16 +503,35 @@ const ProfileDetails = () => {
                       {profileDetails?.academicsEducation?.map((emp) => {
                         return (
                           <>
-                            <p>{emp?.institution}</p>
+                            <h4 className="right">
+                              <p>{emp?.institution}</p>
+
+                              <button
+                                className="icon-hover"
+                               onClick={() => handleDeleteEducation(emp._id)}
+                                href="/"
+
+                              >
+                                <img src={IconDelete} alt="" />
+                              </button>
+
+                              <button
+                                className="icon-hover"
+                                // onClick={handleAcademics}
+                                href="/"
+                              >
+                                <img src={iconEdit} alt="" />
+                              </button>
+                            </h4>
                             <p>{emp?.city} </p>
                           </>
                         );
                       })}
                     </div>
-                    <div className="right">
+                    {/* <div className="right">
                       <button
                         className="icon-hover"
-                        onClick={handleDelete2}
+                        // onClick={handleDelete2}
                         href="/"
                       >
                         <img src={IconDelete} alt="" />
@@ -385,12 +539,12 @@ const ProfileDetails = () => {
 
                       <button
                         className="icon-hover"
-                        onClick={handleAcademics}
+                        // onClick={handleAcademics}
                         href="/"
                       >
                         <img src={iconEdit} alt="" />
                       </button>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
@@ -436,14 +590,31 @@ const ProfileDetails = () => {
                               Project Url: {""}
                               <span>{emp?.projectUrl}</span>
                             </p>
+                            <div className="left ">
+                              <button
+                                className="icon-hover"
+                                onClick={() => handleDeleteProjects(emp._id)}
+                                href="/"
+                              >
+                                <img src={IconDelete} alt="" />
+                              </button>
+
+                              <button
+                                className="icon-hover"
+                                // onClick={handleAcademics}
+                                href="/"
+                              >
+                                <img src={iconEdit} alt="" />
+                              </button>
+                            </div>
                           </>
                         );
                       })}
                     </div>
-                    <div className="right">
+                    {/* <div className="right">
                       <img src={IconDelete} alt="" />
                       <img src={iconEdit} alt="" />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
 
@@ -452,7 +623,7 @@ const ProfileDetails = () => {
                     <h5>Other details</h5>
                     <button
                       className="icon-hover"
-                      onClick={handleDetails}
+                      // onClick={handleDetails}
                       href="/"
                     >
                       <img src={iconEdit} alt="" />
@@ -600,6 +771,7 @@ const ProfileDetails = () => {
         closeConfirm={handleExperience}
         setExperienceData={handleExperienceData}
         getDetails={getProfileDetails}
+        eid={eid}
       />
       <ProjectModal
         isConfirm={isProject}
