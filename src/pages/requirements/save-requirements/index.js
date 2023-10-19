@@ -18,12 +18,25 @@ const SaveRequirements = () => {
     educationQualification: "",
     jobCategorization: {},
     contactDetails:{},
+    contactPerson:"",
+    contactPersonPhone:"",
+    companyName:"",
+    aboutCompany:"",
+    companyWebsite:""
+
+
+
   });
   const {
     addPostNaukri,
     educationQualification,
     contactDetails,
     jobCategorization,
+    contactPerson,
+    contactPersonPhone,
+    companyName,
+    aboutCompany,
+    companyWebsite
   } = saveformData;
 
   const handleChange = (event) => {
@@ -167,18 +180,16 @@ const SaveRequirements = () => {
                     <Form.Label>Functional Area</Form.Label>
                     <Select
                       className="select"
-                      options={OptionsLists.optionList("")}
+                      options={OptionsLists.optionList("functionalArea")}
                       placeholder="Select or start typing category"
-                      name="currentDesignation"
-                      value={OptionsLists.optionList("").filter(function(option) {
-                        return option.value;
-                      })}
-                      // onChange={(selectedOption) =>
-                      //   setFormData((prevFormData) => ({
-                      //     ...prevFormData,
-                      //     currentDesignation: selectedOption,
-                      //   }))
-                      // }
+                      name="functionalArea"
+                      value={OptionsLists.optionList("functionalArea").value}
+                      onChange={(selectedOption) =>
+                        setFormData((prevFormData) => ({
+                          ...prevFormData,
+                          functionalArea: selectedOption,
+                        }))
+                      }
                     />
                   </Col>
                 </Row>

@@ -120,6 +120,13 @@ function optionList(list) {
       { label: "3 Weeks", value: "3 Weeks" },
       { label: "4 Weeks", value: "4 Weeks" },
     ];
+  }else if (list === "functionalArea") {
+    options = [
+      { label: "Software Development", value: "Software Development" },
+      { label: "AI", value: "AI" },
+      { label: "Machine Learning", value: "Machine Learning" },
+      { label: "Game Developer", value: "Game Developer" },
+    ];
   }
 
   return options;

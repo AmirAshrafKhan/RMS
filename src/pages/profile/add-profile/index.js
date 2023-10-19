@@ -177,7 +177,11 @@ const AddProfile = () => {
             Authorization: localStorage.getItem("token"),
           },
         });
-        navigate("/profile");
+        if (response.status === 200) {
+          // history('/profile');
+          navigate("/profile");
+        }
+        // navigate("/profile");
 
         setValidated(false);
       } catch (error) {

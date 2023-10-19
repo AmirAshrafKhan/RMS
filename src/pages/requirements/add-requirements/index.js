@@ -58,7 +58,7 @@ const AddRequirements = () => {
     if(name==="keywords"){
       setFormData((prevData) => ({
         ...prevData,
-        keywords:[...keywords,value],
+        keywords:[value],
       }));  
     }else if(name==="jobLocations"){
       setFormData((prevData) => ({
@@ -198,7 +198,7 @@ const AddRequirements = () => {
                 </Row>
 
                 <Col className="desktop" lg={12} md={12}>
-                  <Form.Label>Jon Description (Required)</Form.Label>
+                  <Form.Label>Job Description (Required)</Form.Label>
 
                   <textarea
                     required
@@ -243,19 +243,19 @@ const AddRequirements = () => {
                   <Col className="desktop" lg={4} md={6}>
                     <Form.Label>Annual CTC</Form.Label>
                     <Select
-                      className="select"
-                      options={OptionsLists.optionList("annualCTC")}
-                      placeholder="USD"
-                      name="annualCTC"
-                      value={OptionsLists.optionList("annualCTC").filter(function(option) {
-                        return option.value === annualCTC;
-                      })}
-                      onChange={(selectedOption) =>
-                        setFormData((prevFormData) => ({
-                          ...prevFormData,
-                          annualCTC: selectedOption.value,
-                        }))
-                      }
+                      // className="select"
+                      // options={OptionsLists.optionList("annualCTC")}
+                      // placeholder="USD"
+                      // name="annualCTC"
+                      // value={OptionsLists.optionList("annualCTC").filter(function(option) {
+                      //   return option.value === annualCTC;
+                      // })}
+                      // onChange={(selectedOption) =>
+                      //   setFormData((prevFormData) => ({
+                      //     ...prevFormData,
+                      //     annualCTC: selectedOption.value,
+                      //   }))
+                      // }
                     />
                   </Col>
 

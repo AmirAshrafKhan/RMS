@@ -239,7 +239,7 @@ const ProfileDetails = (closeConfirm) => {
     debugger;
     setid(id);
     // setid(eid);
-    //setid{}
+    // setid{}
     setIsExperience(!isExperience);
   }
   function handleProject() {
@@ -534,8 +534,8 @@ const ProfileDetails = (closeConfirm) => {
                                   textoverflow: "ellipsis",
                                 }}
                               >
-                                <p>{emp?.institution}</p>
                                 <p>{emp?.city} </p>
+                                <p>{emp?.institution}</p>
                               </div>
                               <div
                                 style={{
@@ -620,20 +620,21 @@ const ProfileDetails = (closeConfirm) => {
                             <div
                               style={{
                                 display: "flex",
-                                justifyContent: "space-between",
+                                justifyContent: "space-evenly",
                                 alignitems: "center",
                                 gap: "600px",
                               }}
                             >
                               <div
                                 style={{
-                                  width: "50%",
-                                  whitespace: "nowrap",
-                                  overflow: "hidden",
-                                  textoverflow: "ellipsis",
+                                  // display:"flex",
+                                  // width: "50%",
+                                  // whitespace: "nowrap",
+                                  // overflow: "hidden",
+                                  // textoverflow: "ellipsis",
                                 }}
                               >
-                                <p> Project Name: {emp?.projectName}</p>
+                                <p> <bold>Project Name:</bold>Project Name: {emp?.projectName}</p>
 
                                 <p>
                                   Project Description: {""}  {emp?.description}
@@ -645,12 +646,12 @@ const ProfileDetails = (closeConfirm) => {
                                 </p>
                               </div>
                               <div
-                               style={{
-                                width: "50%",
-                                display: "flex",
-                                justifycontent: "flex-end",
-                                gap: "10px",
-                              }}
+                              //  style={{
+                              //   width: "50%",
+                              //   display: "flex",
+                              //   justifycontent: "flex-end",
+                              //   gap: "10px",
+                              // }}
                               >
                                 <button
                                   className="icon-hover"
@@ -834,6 +835,7 @@ const ProfileDetails = (closeConfirm) => {
         setExperienceData={handleExperienceData}
         getDetails={getProfileDetails}
         eid={eid}
+        
       />
       <ProjectModal
         isConfirm={isProject}
