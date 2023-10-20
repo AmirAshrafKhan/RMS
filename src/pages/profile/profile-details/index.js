@@ -17,6 +17,8 @@ import ExperienceModal from "components/modal/ExperienceModal";
 import ProjectModal from "components/modal/ProjectModal";
 import CommonModal from "components/modal/CommonModal";
 import CommonDeletModal from "components/modal/CommonDeletModal";
+import SkillsModal from "components/modal/SkillsModal";
+import SummaryModal from "components/modal/SummaryModal";
 import { allRoutes } from "constants/allRoutes";
 import { Link, useLocation } from "react-router-dom";
 import { apiBase } from "apiBase";
@@ -337,12 +339,10 @@ const ProfileDetails = (closeConfirm) => {
                             {profileDetails?.currentCompany}
                           </li>
                           <li>
-                            <span>Previous Designation: </span>Sr. Software
-                            Developer
+                            <span>Previous Designation: </span>
                           </li>
                           <li>
-                            <span>Previous Company:</span> Sr. Software
-                            Developer
+                            <span>Previous Company:</span>
                           </li>
                           <li>
                             <span>Functional Area :</span>{" "}
@@ -443,16 +443,28 @@ const ProfileDetails = (closeConfirm) => {
                                 display: "flex",
                                 justifyContent: "space-between",
                                 alignitems: "center",
-                                gap: "600px",
+                                gap: "550px",
                               }}
                             >
-                              <div>
-                                <span>{emp?.companyName}</span>
-                              </div>
                               <div
                                 style={{
                                   display: "flex",
                                   justifycontent: "flex-end",
+                                }}
+                              >
+                                <p>
+                                  Company:{emp?.companyName}  Position:
+                                 {emp?.position}  Start:
+                                  {emp?.startDate?.substring(0, 10)} End:
+                                  {emp?.endDate?.substring(0, 10)}
+                                </p>
+                              </div>
+                              <div
+                                style={{
+                                  width: "70%",
+                                  display: "flex",
+                                  justifycontent: "flex-end",
+                                  gap: "10px",
                                 }}
                               >
                                 <button
@@ -476,13 +488,6 @@ const ProfileDetails = (closeConfirm) => {
                                 </button>
                               </div>
                             </div>
-                            <p>
-                              {emp?.position} |{" "}
-                              {emp?.startDate?.substring(0, 10)}{" "}
-                              {emp?.endDate?.substring(0, 10)
-                                ? "To" + emp?.endDate.substring(0, 10)
-                                : null}{" "}
-                            </p>
                           </>
                         );
                       })}
@@ -521,25 +526,31 @@ const ProfileDetails = (closeConfirm) => {
                               className="right"
                               style={{
                                 display: "flex",
-                                justifyContent: "space-between",
+                                justifyContent: "space-around",
                                 alignitems: "center",
                                 gap: "600px",
                               }}
                             >
                               <div
                                 style={{
-                                  width: "50%",
+                                  width: "70%",
                                   whitespace: "nowrap",
                                   overflow: "hidden",
                                   textoverflow: "ellipsis",
                                 }}
                               >
-                                <p>{emp?.city} </p>
-                                <p>{emp?.institution}</p>
+                                <p>College:{emp?.collegeName}</p>
+                                <p> Course:{emp?.course} </p>
+                                <p> City:{emp?.city} </p>
+                                <p>
+                                  {" "}
+                                  Start:{emp?.startDate?.substring(0, 10)}{" "}
+                                </p>
+                                <p> End:{emp?.endDate?.substring(0, 10)} </p>
                               </div>
                               <div
                                 style={{
-                                  width: "50%",
+                                  width: "70%",
                                   display: "flex",
                                   justifycontent: "flex-end",
                                   gap: "10px",
@@ -626,18 +637,23 @@ const ProfileDetails = (closeConfirm) => {
                               }}
                             >
                               <div
-                                style={{
-                                  // display:"flex",
-                                  // width: "50%",
-                                  // whitespace: "nowrap",
-                                  // overflow: "hidden",
-                                  // textoverflow: "ellipsis",
-                                }}
+                                style={
+                                  {
+                                    // display:"flex",
+                                    // width: "50%",
+                                    // whitespace: "nowrap",
+                                    // overflow: "hidden",
+                                    // textoverflow: "ellipsis",
+                                  }
+                                }
                               >
-                                <p> <bold>Project Name:</bold>Project Name: {emp?.projectName}</p>
+                                <p>
+                                  {" "}
+                                  <bold>Project Name:</bold> {emp?.projectName}
+                                </p>
 
                                 <p>
-                                  Project Description: {""}  {emp?.description}
+                                  Project Description: {""} {emp?.description}
                                 </p>
                                 <p>
                                   {" "}
@@ -835,7 +851,6 @@ const ProfileDetails = (closeConfirm) => {
         setExperienceData={handleExperienceData}
         getDetails={getProfileDetails}
         eid={eid}
-        
       />
       <ProjectModal
         isConfirm={isProject}
@@ -844,11 +859,12 @@ const ProfileDetails = (closeConfirm) => {
         getDetails={getProfileDetails}
       />
       {/* <ProjectModal isConfirm={isProject} closeConfirm={handleProject} /> */}
-      <CommonModal isConfirm={isSummary} closeConfirm={handleSummary} />
+      <SummaryModal isConfirm={isSummary} closeConfirm={handleSummary} />
       <CommonModal isConfirm={isWork} closeConfirm={handleWork} />
 
       <CommonModal isConfirm={isAcademics} closeConfirm={handleAcademics} />
-      <CommonModal isConfirm={isSkills} closeConfirm={handleSkills} />
+      {/* <CommonModal isConfirm={isSkills} closeConfirm={handleSkills} /> */}
+      <SkillsModal isConfirm={isSkills} closeConfirm={handleSkills} />
       <CommonModal isConfirm={isDetails} closeConfirm={handleDetails} />
       <CommonDeletModal isConfirm={isDelete1} closeConfirm={handleDelete1} />
       <CommonDeletModal isConfirm={isDelete2} closeConfirm={handleDelete2} />

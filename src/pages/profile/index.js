@@ -1704,7 +1704,7 @@ const Profile = () => {
                               <ul>
                                 <li>
                                   <span>Current Location:</span>{" "}
-                                  {val.currentCity} Year(s){" "}
+                                  {val.currentCity} 
                                 </li>
                                 <li>
                                   <span> Preferred Location: </span>{" "}
@@ -1712,11 +1712,11 @@ const Profile = () => {
                                 </li>
 
                                 <li>
-                                  <span>Phone Number </span> Sr.
+                                  <span>Phone Number: </span> 
                                   {val.phone}
                                 </li>
                                 <li>
-                                  <span>Email:</span> Sr. Software
+                                  <span>Email:</span> 
                                   {val.email}
                                 </li>
                                 <li>

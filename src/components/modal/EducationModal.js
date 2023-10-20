@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./modal.scss";
-import { Col, Form, Modal } from "react-bootstrap";
+import { Col, Form, Modal, Row } from "react-bootstrap";
 import CommonButton from "components/common-button";
 import axios from "axios";
 import { apiBase } from "apiBase";
@@ -16,11 +16,11 @@ const EducationModal = ({
   getDetails,
 }) => {
   const navigate = useNavigate();
-  const [collegeName, setCollegeName] = useState("");
+  // const [collegeName, setCollegeName] = useState("");
   const [validated, setValidated] = useState(false);
 
   const [year, setYear] = useState("");
-  const [city, setCity] = useState("");
+  // const [city, setCity] = useState("");
 
   const [formData, setFormData] = useState({
     institution: "",
@@ -49,7 +49,8 @@ const EducationModal = ({
     closeConfirm();
   };
 
-  const {institution, currentCity, course, joiningDate } = formData;
+  const { collegeName, city, course, joiningDate, startDate, endDate } =
+    formData;
   const location = useLocation();
   const { profileID } = location.state !== null && location.state;
   // const handleSaveChanges = async () => {
@@ -100,19 +101,21 @@ const EducationModal = ({
         debugger;
 
         const {
-          institution,
-
           course,
+          collegeName,
 
-         
+          city,
+          startDate,
+          endDate,
         } = response.data.data;
         setFormData({
           ...formData,
-          institution: institution,
+          collegeName: collegeName,
 
           course: course,
-
-          
+          startDate: startDate,
+          endDate: endDate,
+          city: city,
         });
         // console.log(getKeyByValue(response.data.data,formData),'Keysss')
       }
@@ -188,9 +191,12 @@ const EducationModal = ({
               rows="3"
               placeholder="College Name "
               onResize={false}
-              name="institution"
-              value={institution}
+              name="collegeName"
+              value={collegeName}
               onChange={handleInputChange}
+              // ########
+
+              // ########
               // onChange={(e) => setCollegeName(e.target.value)}
             />
             {/* <Form.Control
@@ -222,13 +228,13 @@ const EducationModal = ({
                 }))
               }
             /> */}
-                <textarea
+            <textarea
               type="text"
               required
               className="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
-              placeholder="College Name "
+              placeholder="enter course "
               onResize={false}
               name="course"
               value={course}
@@ -238,22 +244,53 @@ const EducationModal = ({
           </Form.Group>
 
           <Form.Group className="mb-3" as={Col} controlId="formGridText">
-            <Form.Label>Year </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="year "
-              value={year}
-              onChange={(e) => setYear(e.target.value)}
-            />
+            <Row>
+              <Col sm={6} col={12} className="mb-3">
+                <label className="mb-2" for="start">
+                  Start date:
+                </label>
+
+                <input
+                  className="date-input"
+                  type="date"
+                  id="start"
+                  name="startDate"
+                  value={startDate?.substring(0, 10)}
+                  onChange={handleInputChange}
+                />
+              </Col>
+              <Col sm={6} col={12} className="mb-3">
+                <label className="mb-2" for="end">
+                  End date:
+                </label>
+
+                <input
+                  className="date-input"
+                  type="date"
+                  id="end"
+                  name="endDate"
+                  value={endDate?.substring(0, 10)}
+                  onChange={handleInputChange}
+                />
+              </Col>
+            </Row>
           </Form.Group>
 
           <Form.Group className="mb-3" as={Col} controlId="formGridText">
             <Form.Label>City</Form.Label>
-            <Form.Control
+
+            <textarea
               type="text"
-              placeholder="City"
+              required
+              className="form-control"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              placeholder="enter city"
+              onResize={false}
+              name="city"
               value={city}
-              onChange={(e) => setCity(e.target.value)}
+              onChange={handleInputChange}
+              // onChange={(e) => setCollegeName(e.target.value)}
             />
           </Form.Group>
         </Form>

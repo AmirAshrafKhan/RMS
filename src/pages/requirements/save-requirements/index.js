@@ -7,25 +7,23 @@ import CommonButton from "components/common-button";
 import Heading from "components/heading";
 import axios from "axios";
 import OptionsLists from "OptionsLists";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { apiBase } from "apiBase";
 
 const SaveRequirements = () => {
+  const navigate = useNavigate();
   const [validated, setValidated] = useState(false);
 
   const [saveformData, setFormData] = useState({
     addPostNaukri: "",
     educationQualification: "",
     jobCategorization: {},
-    contactDetails:{},
-    contactPerson:"",
-    contactPersonPhone:"",
-    companyName:"",
-    aboutCompany:"",
-    companyWebsite:""
-
-
-
+    contactDetails: {},
+    contactPerson: "",
+    contactPersonPhone: "",
+    companyName: "",
+    aboutCompany: "",
+    companyWebsite: "",
   });
   const {
     addPostNaukri,
@@ -36,70 +34,120 @@ const SaveRequirements = () => {
     contactPersonPhone,
     companyName,
     aboutCompany,
-    companyWebsite
+    companyWebsite,
   } = saveformData;
+
+  // const handleChange = (event) => {
+  //   const { name, value } = event.target;
+
+  //   if (
+  //     name === "contactPerson" ||
+  //     name === "contactPersonPhone" ||
+  //     name === "companyName" ||
+  //     name === "aboutCompany" ||
+  //     name === "companyWebsite"
+  //   ) {
+  //     console.log(value, "values");
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       contactDetails: { [name]: value, ...saveformData.contactDetails },
+  //     }));
+  //   } else if (name === "educationQualification" || name === "functionalArea") {
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       jobCategorization: { [name]: value, ...saveformData.jobCategorization },
+  //     }));
+  //   } else {
+  //     setFormData((prevData) => ({
+  //       ...prevData,
+  //       [name]: value,
+  //     }));
+  //   }
+
+  //   let addReqFormData = JSON.parse(localStorage.getItem("add_requirement"));
+  //   console.log(addReqFormData, "parse addReqFormData");
+  //   console.log(
+  //     addReqFormData.requirementTitle,
+  //     "addReqFormData.requirementTitle"
+  //   );
+  // };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if(name==="contactPerson" || name==="contactPersonPhone" || name==="companyName" || name==="aboutCompany" || name==="companyWebsite"){
-      console.log(value,'values');
+    if (
+      name === "contactPerson" ||
+      name === "contactPersonPhone" ||
+      name === "companyName" ||
+      name === "aboutCompany" ||
+      name === "companyWebsite"
+    ) {
       setFormData((prevData) => ({
         ...prevData,
-        contactDetails:{[name]:value,...saveformData.contactDetails},
-      }));  
-    }else if(name==="educationQualification" || name==="functionalArea"){
+        contactDetails: {
+          ...prevData.contactDetails,
+          [name]: value,
+        },
+      }));
+    } else if (name === "educationQualification" || name === "functionalArea") {
       setFormData((prevData) => ({
         ...prevData,
-        jobCategorization:{[name]:value,...saveformData.jobCategorization},
-      }));  
-    
-    }else{
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  }
+        jobCategorization: {
+          ...prevData.jobCategorization,
+          [name]: value,
+        },
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
 
     let addReqFormData = JSON.parse(localStorage.getItem("add_requirement"));
-      console.log(addReqFormData,'parse addReqFormData') ;
-      console.log(addReqFormData.requirementTitle,'addReqFormData.requirementTitle')
+    console.log(addReqFormData, "parse addReqFormData");
+    console.log(
+      addReqFormData.requirementTitle,
+      "addReqFormData.requirementTitle"
+    );
   };
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     setValidated(true);
 
     event.preventDefault();
     event.stopPropagation();
 
     // localStorage.clear();
-    
-     const form = event.currentTarget;
-    
+
+    const form = event.currentTarget;
+
     // if (form.checkValidity() === false) {
     if (form.checkValidity() === true) {
       event.preventDefault();
       event.stopPropagation();
 
-      let newAdd=JSON.parse( localStorage.getItem("add_requirement"))
-      let data={
-        ...saveformData,...newAdd
+      let newAdd = JSON.parse(localStorage.getItem("add_requirement"));
+      let data = {
+        ...saveformData,
+        ...newAdd,
+      };
+
+      try {
+        const response = await apiBase.post("requirement/add", data, {
+          headers: { Authorization: localStorage.getItem("token") },
+        });
+        if (response.status === 200) {
+          // history('/profile');
+          navigate("/");
+        }
+
+        console.log(response.data);
+        Navigate("/");
+      } catch (error) {
+        console.error(error);
       }
-     
- try {
-
-      const response = await apiBase.post("requirement/add",
-        data,
-        { headers: { Authorization: localStorage.getItem("token")}}
-      );
-     
-      console.log(response.data);
-      Navigate('/')
-
-    } catch (error) {
-      console.error(error);
-    }
-    }else{
+    } else {
       setValidated(true);
     }
   };
@@ -125,14 +173,15 @@ const SaveRequirements = () => {
             </div>
 
             <div className="details-box">
-              <Form noValidate validated={validated} 
-              onSubmit={handleSubmit}
-              >
+              <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <h4>Please Fill up the additional Details</h4>
                 <Row className="input-border">
-                  <CheckboxTitle title="Add this post in Naukri " name="addPostNaukri"
-                            value={addPostNaukri}
-                            onChange={handleChange}/>
+                  <CheckboxTitle
+                    title="Add this post in Naukri "
+                    name="addPostNaukri"
+                    value={addPostNaukri}
+                    onChange={handleChange}
+                  />
                 </Row>
 
                 <h4>Please Fill up the Educational Details </h4>
@@ -141,10 +190,14 @@ const SaveRequirements = () => {
                     <Form.Label>Educational Qualification</Form.Label>
                     <Select
                       className="select"
-                      options={OptionsLists.optionList("educationQualification")}
+                      options={OptionsLists.optionList(
+                        "educationQualification"
+                      )}
                       placeholder="Select educational qualification"
                       name="educationQualification"
-                      value={OptionsLists.optionList("educationQualification").filter(function(option) {
+                      value={OptionsLists.optionList(
+                        "educationQualification"
+                      ).filter(function (option) {
                         return option.value === educationQualification;
                       })}
                       onChange={(selectedOption) =>
@@ -170,7 +223,7 @@ const SaveRequirements = () => {
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
-                          jobCategorization: {"industry": selectedOption.value},
+                          jobCategorization: { industry: selectedOption.value },
                         }))
                       }
                     />
@@ -204,8 +257,8 @@ const SaveRequirements = () => {
                         type="text"
                         placeholder="Enter contact person name"
                         name="contactPerson"
-                      value={contactDetails.contactPerson}
-                      onChange={handleChange}
+                        value={contactDetails.contactPerson}
+                        onChange={handleChange}
                       />
                       <Form.Control.Feedback type="invalid">
                         Please Enter contact person name
@@ -217,12 +270,13 @@ const SaveRequirements = () => {
                     <Form.Group as={Col} controlId="formGridText">
                       <Form.Label>Contact Person Phone </Form.Label>
                       <Form.Control
+                        as="textarea"
+                        rows={1}
                         required
-                        type="text"
                         placeholder="Enter contact person Phone number"
                         name="contactPersonPhone"
-                            value={contactDetails.contactPersonPhone}
-                            onChange={handleChange}
+                        value={contactDetails.contactPersonPhone}
+                        onChange={handleChange}
                       />
                       <Form.Control.Feedback type="invalid">
                         PleaseEnter contact person Phone number
@@ -240,8 +294,8 @@ const SaveRequirements = () => {
                         type="text"
                         placeholder="Enter company website url "
                         name="companyWebsite"
-                            value={contactDetails.companyWebsite}
-                            onChange={handleChange}
+                        value={contactDetails.companyWebsite}
+                        onChange={handleChange}
                       />
                       <Form.Control.Feedback type="invalid">
                         Please Enter company website url
@@ -257,8 +311,8 @@ const SaveRequirements = () => {
                         type="text"
                         placeholder="Enter company name"
                         name="companyName"
-                            value={contactDetails.companyName}
-                            onChange={handleChange}
+                        value={contactDetails.companyName}
+                        onChange={handleChange}
                       />
                       <Form.Control.Feedback type="invalid">
                         Please Enter company name
@@ -285,8 +339,12 @@ const SaveRequirements = () => {
                     Enter a description...
                   </Form.Control.Feedback>
                 </Col>
-                
-                <CommonButton type="submit" title="Save Reqiurement" onClick={handleSubmit}/>
+
+                <CommonButton
+                  type="submit"
+                  title="Save Reqiurement"
+                  onClick={handleSubmit}
+                />
               </Form>
             </div>
           </div>

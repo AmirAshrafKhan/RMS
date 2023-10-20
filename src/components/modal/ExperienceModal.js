@@ -110,7 +110,8 @@ const ExperienceModal = ({
     setFormData({ ...formData, position: value });
   };
 
-  const handleUpdate = async (event) => {
+  {
+    /*} const handleUpdate = async (event) => {
     console.log(formData, "formData expere");
     event.preventDefault();
     const form = event.currentTarget;
@@ -136,7 +137,8 @@ const ExperienceModal = ({
           }
 
           setValidated(false);
-        } else {
+        }
+         else {
           const response = await apiBase.post(
             `profile/add-experience/${profileID}`,
             formData,
@@ -161,7 +163,8 @@ const ExperienceModal = ({
     }
 
     setValidated(true);
-  };
+  };*/
+  }
   // const handleChange = (event) => {
   //   const { name, value } = event.target;
 
@@ -170,6 +173,38 @@ const ExperienceModal = ({
   //     [name]: value,
   //   }));
   // };
+  const handleUpdate = async (event) => {
+    console.log(formData, "formData expere");
+    event.preventDefault();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.stopPropagation();
+    } else {
+      try {
+        const response = await apiBase.post(
+          `profile/add-experience/${profileID}`,
+          formData,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
+        if (response.status === 200) {
+          // history('/profile');
+          // navigate("/profile");
+          getDetails(profileID);
+          closeConfirm();
+        }
+
+        setValidated(false);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    setValidated(true);
+  };
 
   console.log(formData);
 

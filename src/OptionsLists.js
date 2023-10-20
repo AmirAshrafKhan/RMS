@@ -6,7 +6,7 @@ function optionList(list) {
       { value: "java", label: "java" },
       { value: ".Net", label: ".Net" },
       { value: "Python", label: "Python" },
-      { value: "JavaScipt", label: ".JavaScipt" },
+      { value: "JavaScipt", label: "JavaScipt" },
       { value: "C, C++", label: "C, C++" },
     ];
   } else if (list === "employmentType") {
@@ -126,6 +126,13 @@ function optionList(list) {
       { label: "AI", value: "AI" },
       { label: "Machine Learning", value: "Machine Learning" },
       { label: "Game Developer", value: "Game Developer" },
+    ];
+  }else if (list === "jobRole") {
+    options = [
+      { label: "Tech. Support", value: "Tech. Support" },
+      { label: "Junior Developer", value: "Junior Developer" },
+      { label: "Senior Developer", value: "Senior Developer" },
+      { label: "Full Stack Developer", value: "Full Stack Developer" },
     ];
   }
 

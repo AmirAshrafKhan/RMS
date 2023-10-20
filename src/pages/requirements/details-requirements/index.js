@@ -247,26 +247,25 @@ const RequirementDetails = () => {
                       <div className="details-content">
                         <ul>
                           <li>
-                            <span>: </span>{reqData && reqData.desiredCandidateDescription}
+                            <span> Desired Description: </span>{reqData && reqData.desiredCandidateDescription}
                           </li>
                           <li>
                             <span>Education: </span>{reqData && reqData.educationalQualification}
                           </li>
 
                           <li>
-                            <span>About Company:</span>{reqData && reqData.contactDetails && reqData.aboutCompany}
+                            <span>About Company:</span>{reqData && reqData.contactDetails.aboutCompany && reqData.contactDetails.aboutCompany}
                           </li>
                           <li>
-                            <span>Company Name :</span>{reqData && reqData.contactDetails && reqData.companyName}
+                            <span>Company Name :</span>{reqData && reqData.contactDetails && reqData.contactDetails.companyName}
                           </li>
                           <li>
-                            <span>Email:</span> {reqData && reqData.contactDetails && reqData.aboutCompany}
+                            <span>Email:</span> {reqData && reqData.contactDetails && reqData.contactDetails.email}
                           </li>
                           <li>
-                            <span>Website:</span> {reqData && reqData.contactDetails && reqData.companyWebsite}
                           </li>
                           <li>
-                            <span>Contact Person:</span> {reqData && reqData.contactDetails && reqData.contactPerson}
+                            <span>Contact Person:</span> {reqData && reqData.contactDetails && reqData.contactDetails.contactPerson}
                           </li>
                           <li>
                             <span>Phone:</span> {reqData && reqData.contactDetails && reqData.contactPersonPhone}

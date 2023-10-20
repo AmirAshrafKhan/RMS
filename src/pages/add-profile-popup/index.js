@@ -9,6 +9,7 @@ import { iconProfile, iconResume } from "assets/images";
 import { apiBase } from "apiBase";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import OptionsLists from "OptionsLists";
+import Cities from "pages/profile/add-profile/Cities";
 
 const AddProfilePopup = () => {
   const [profileDetails, setProfileDetails] = useState({});
@@ -44,6 +45,7 @@ const AddProfilePopup = () => {
     noticePeriod: "",
     educationDetails: {},
     employmentType: "Full Time",
+    previousRequirements: "",
 
     additionalDetails: {
       resumeProcessedBy: "Me",
@@ -89,6 +91,7 @@ const AddProfilePopup = () => {
     noticePeriod,
     educationDetails,
     employmentType,
+    previousRequirements,
   } = formData;
 
   const location = useLocation();
@@ -138,6 +141,7 @@ const AddProfilePopup = () => {
           keySkills,
           industry,
           role,
+          previousRequirements,
         } = response.data.data;
         setFormData({
           ...formData,
@@ -150,7 +154,8 @@ const AddProfilePopup = () => {
           currentCTC: currentCTC,
           keySkills: keySkills,
           industry: industry,
-          role,
+          role: role,
+          previousRequirements: previousRequirements,
         });
         // console.log(getKeyByValue(response.data.data,formData),'Keysss')
       }
@@ -248,6 +253,11 @@ const AddProfilePopup = () => {
     }
   };
 
+  const cityOptions = Cities.map((city) => ({
+    value: city.id,
+    label: `${city.name}, ${city.state}`,
+  }));
+
   return (
     <>
       <section className="add-profile section-padding">
@@ -310,10 +320,12 @@ const AddProfilePopup = () => {
                     <Form.Group as={Col} controlId="formGridText">
                       <Form.Label>Email</Form.Label>
                       <Form.Control
-                        value={email}
                         required
                         type="text"
                         placeholder="Please enter email address"
+                        name="email"
+                        value={email}
+                        onChange={handleChange}
                       />
                       <Form.Control.Feedback type="invalid">
                         Please enter email address
@@ -378,7 +390,12 @@ const AddProfilePopup = () => {
                           )}
                           placeholder=" select year"
                           name="years"
-                          value={workExperience.years}
+                          // value={workExperience.years}
+                          value={OptionsLists.optionList(
+                            "minimumWorkExperience"
+                          ).filter(function (option) {
+                            return option.value === workExperience.years;
+                          })}
                           onChange={(selectedOption) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
@@ -395,13 +412,15 @@ const AddProfilePopup = () => {
                         <Form.Label className="expirence"></Form.Label>
                         <Select
                           className="select"
-                          options={OptionsLists.optionList(
-                            "minimumWorkExperience"
-                          )}
+                          options={OptionsLists.optionList("monthsExperience")}
                           placeholder=" 
                           select month"
                           name="months"
-                          value={workExperience.months}
+                          value={OptionsLists.optionList(
+                            "monthsExperience"
+                          ).filter(function (option) {
+                            return option.value === workExperience.months;
+                          })}
                           onChange={(selectedOption) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
@@ -423,7 +442,11 @@ const AddProfilePopup = () => {
                       options={OptionsLists.optionList("jobLocation")}
                       placeholder=" Select Company"
                       name="currentCompany"
-                      value={currentCompany}
+                      value={OptionsLists.optionList("jobLocation").filter(
+                        function (option) {
+                          return option.value === currentCompany;
+                        }
+                      )}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -442,7 +465,11 @@ const AddProfilePopup = () => {
                           options={OptionsLists.optionList("annualCTC")}
                           placeholder="  select lakhs"
                           name="currentCTCLakhs"
-                          value={currentCTC.lakhs}
+                          value={OptionsLists.optionList("annualCTC").filter(
+                            function (option) {
+                              return option.value === currentCTC.lakhs;
+                            }
+                          )}
                           onChange={(selectedOption) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
@@ -462,7 +489,11 @@ const AddProfilePopup = () => {
                           options={OptionsLists.optionList("thousands")}
                           placeholder=" select thousands"
                           name="currentCTCThous"
-                          value={currentCTC.thousands}
+                          value={OptionsLists.optionList("thousands").filter(
+                            function (option) {
+                              return option.value === currentCTC.thousands;
+                            }
+                          )}
                           onChange={(selectedOption) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
@@ -477,19 +508,11 @@ const AddProfilePopup = () => {
                     </Row>
                   </Col>
                   <Col className="desktop" lg={6} md={6}>
-                    <Form.Label>Prefered City</Form.Label>
+                    <Form.Label>Current City</Form.Label>
                     <Select
                       className="select"
-                      options={OptionsLists.optionList("jobLocation")}
-                      placeholder="Search & select city  "
-                      name="preferredCity"
-                      value={preferredCity}
-                      onChange={(selectedOption) =>
-                        setFormData((prevFormData) => ({
-                          ...prevFormData,
-                          preferredCity: selectedOption.value,
-                        }))
-                      }
+                      options={cityOptions}
+                      placeholder="Select a city"
                     />
                   </Col>
 
@@ -502,7 +525,11 @@ const AddProfilePopup = () => {
                           options={OptionsLists.optionList("annualCTC")}
                           placeholder="select lakhs"
                           name="lakhs"
-                          value={expectedCTC.lakhs}
+                          value={OptionsLists.optionList("annualCTC").filter(
+                            function (option) {
+                              return option.value === expectedCTC.lakhs;
+                            }
+                          )}
                           onChange={(selectedOption) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
@@ -522,7 +549,11 @@ const AddProfilePopup = () => {
                           options={OptionsLists.optionList("jobLocation")}
                           placeholder="select thousands"
                           name="jobLocation"
-                          value={expectedCTC.thousands}
+                          value={OptionsLists.optionList("jobLocation").filter(
+                            function (option) {
+                              return option.value === expectedCTC.thousands;
+                            }
+                          )}
                           onChange={(selectedOption) =>
                             setFormData((prevFormData) => ({
                               ...prevFormData,
@@ -541,16 +572,8 @@ const AddProfilePopup = () => {
                     <Form.Label>Prefered City</Form.Label>
                     <Select
                       className="select"
-                      options={OptionsLists.optionList("jobLocation")}
-                      placeholder="Search & select city  "
-                      name="preferredCity"
-                      value={preferredCity}
-                      onChange={(selectedOption) =>
-                        setFormData((prevFormData) => ({
-                          ...prevFormData,
-                          preferredCity: selectedOption.value,
-                        }))
-                      }
+                      options={cityOptions}
+                      placeholder="Select a city"
                     />
                   </Col>
 
@@ -558,11 +581,15 @@ const AddProfilePopup = () => {
                     <Form.Label>Functional Area</Form.Label>
                     <Select
                       className="select"
-                      options={OptionsLists.optionList("jobCategorization")}
+                      options={OptionsLists.optionList("functionalArea")}
                       placeholder="
-                      Search & select functional area (e.i  Product management)"
+                      Search & select functional area"
                       name="functionalArea"
-                      value={functionalArea}
+                      value={OptionsLists.optionList("functionalArea").filter(
+                        function (option) {
+                          return option.value === functionalArea;
+                        }
+                      )}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -576,11 +603,15 @@ const AddProfilePopup = () => {
                     <Form.Label>Role</Form.Label>
                     <Select
                       className="select"
-                      options={OptionsLists.optionList("jobCategorization")}
+                      options={OptionsLists.optionList("jobRole")}
                       placeholder="
                       Search & select role "
                       name="role"
-                      value={role}
+                      value={OptionsLists.optionList("jobRole").filter(
+                        function (option) {
+                          return option.value === role;
+                        }
+                      )}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -598,7 +629,11 @@ const AddProfilePopup = () => {
                       placeholder="
                       Search & select industry "
                       name="industry"
-                      value={industry}
+                      value={OptionsLists.optionList(
+                        "jobCategorization"
+                      ).filter(function (option) {
+                        return option.value === industry;
+                      })}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -615,7 +650,11 @@ const AddProfilePopup = () => {
                       options={OptionsLists.optionList("previousRequirements")}
                       placeholder=" Search & select requirements from the list"
                       name="keySkills"
-                      value={keySkills}
+                      value={OptionsLists.optionList(
+                        "previousRequirements"
+                      ).filter(function (option) {
+                        return option.value === keySkills;
+                      })}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
@@ -634,11 +673,15 @@ const AddProfilePopup = () => {
                       options={OptionsLists.optionList("previousRequirements")}
                       placeholder="Search & select requirements from the list"
                       name="selectedRequirements"
-                      value={selectedRequirements}
+                      value={OptionsLists.optionList(
+                        "previousRequirements"
+                      ).filter(function (option) {
+                        return option.value === keySkills;
+                      })}
                       onChange={(selectedOption) =>
                         setFormData((prevFormData) => ({
                           ...prevFormData,
-                          selectedRequirements: selectedOption.value,
+                          selectedRequirements: selectedRequirements.value,
                         }))
                       }
                     />
