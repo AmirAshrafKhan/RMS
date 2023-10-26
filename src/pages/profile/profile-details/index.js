@@ -1,6 +1,7 @@
 import React, { useState, useEffect, uselo } from "react";
 import "./profiledetails.scss";
 import { Col, Container, Form, Row } from "react-bootstrap";
+import { iconProfile, iconResume } from "assets/images";
 import Heading from "components/heading";
 import {
   IconDelete,
@@ -19,6 +20,7 @@ import CommonModal from "components/modal/CommonModal";
 import CommonDeletModal from "components/modal/CommonDeletModal";
 import SkillsModal from "components/modal/SkillsModal";
 import SummaryModal from "components/modal/SummaryModal";
+import UploadProfile from "components/upload-profile";
 import { allRoutes } from "constants/allRoutes";
 import { Link, useLocation } from "react-router-dom";
 import { apiBase } from "apiBase";
@@ -37,6 +39,148 @@ const ProfileDetails = (closeConfirm) => {
   const location = useLocation();
   const { profileID } = location.state !== null && location.state;
   const [validated, setValidated] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [pdfFile, setPdfFile] = useState(null);
+
+  const [pdfUrl, setPdfUrl] = useState("");
+
+  const handleUpload = async () => {
+    if (selectedFile) {
+      // Create a FormData object to send the file in the POST request
+      const formData = new FormData();
+      formData.append("files", selectedFile);
+
+      const response = await apiBase.post(
+        `profile/attach-documents/${profileID}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+      console.log(response, "respose");
+
+      if (response.status === 200) {
+        // setFiles(response);
+        // navigate("/profile");
+      } else {
+        console.log(response);
+      }
+    } else {
+      // Handle case where no file is selected
+      console.error("Please select a file to upload");
+    }
+  };
+
+  useEffect(() => {
+    handleDownloadResume();
+    // setSelectedFile(file);
+  }, []);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+
+    // setSelectedFile(file);
+  };
+
+  // const handleDownloadResume = async () => {
+  //   try {
+  //     const response = await apiBase.get(
+  //       `profile/download-resume/${profileID}`,
+
+  //       {
+  //         headers: {
+  //           "Content-Type": "multipart/form-data",
+  //           Authorization: localStorage.getItem("token"),
+  //           responseType: "blob",
+  //         },
+  //       }
+  //     );
+  //     const blob = new Blob([response.data.url], { type: "application/pdf" });
+  //     const pdfUrl = URL.createObjectURL(blob);
+
+  //     console.log(response, "respose");
+
+  //     if (response.status === 200) {
+  //       const pdfUrl = window.URL.createObjectURL(new Blob([response.data]));
+
+  //       setSelectedFile(pdfUrl);
+  //     } else {
+  //       console.log(response);
+  //     }
+  //   } catch {
+  //     // Handle case where no file is selected
+  //     console.error("Please select a file to upload");
+  //   }
+  // };
+
+  console.log("profileID: ", profileID);
+
+  const handleDownloadResume = async () => {
+    try {
+      // Make an API request to get the PDF data
+      const response = await apiBase.get(
+        `profile/download-resume/${profileID}`,
+        {
+          responseType: "blob",
+          headers: {
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        const blob = new Blob([response.data], { type: "application/pdf" });
+
+        // const pdfUrl = URL.createObjectURL(blob);
+        const pdfUrl = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement("a");
+        link.href = pdfUrl;
+
+        setSelectedFile(pdfUrl);
+
+        console.log("PDF URL:", pdfUrl); // Log the URL
+      } else {
+        console.log("Received a non-200 response:", response);
+      }
+    } catch (error) {
+      console.error("Error while downloading the PDF:", error);
+    }
+  };
+
+  console.log("Selected file URL:", pdfFile);
+
+  const handleDeleteResume = async () => {
+    if (selectedFile) {
+      // Create a FormData object to send the file in the POST request
+      const formData = new FormData();
+      formData.append("files", selectedFile);
+
+      const response = await apiBase.delete(
+        `profile/delete-resume/${profileID}`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+      console.log(response, "respose");
+
+      if (response.status === 200) {
+        // setFiles(response);
+        // navigate("/profile");
+      } else {
+        console.log(response);
+      }
+    } else {
+      // Handle case where no file is selected
+      console.error("Please select a file to upload");
+    }
+  };
 
   const [formData, setFormData] = useState({
     companyName: "",
@@ -53,6 +197,14 @@ const ProfileDetails = (closeConfirm) => {
       getProfileDetails();
     }
   }, []);
+
+  const handleResumeChange = (event) => {
+    const file = event.target.files[0];
+    setFormData((prevData) => ({
+      ...prevData,
+      resume: file,
+    }));
+  };
 
   const getProfileDetails = async () => {
     try {
@@ -339,10 +491,16 @@ const ProfileDetails = (closeConfirm) => {
                             {profileDetails?.currentCompany}
                           </li>
                           <li>
-                            <span>Previous Designation: </span>
+                            <span>
+                              Previous Designation:{" "}
+                              {profileDetails?.previousDesignation}{" "}
+                            </span>
                           </li>
                           <li>
-                            <span>Previous Company:</span>
+                            <span>
+                              Previous Company:{" "}
+                              {profileDetails?.previousCompany}
+                            </span>
                           </li>
                           <li>
                             <span>Functional Area :</span>{" "}
@@ -442,28 +600,28 @@ const ProfileDetails = (closeConfirm) => {
                               style={{
                                 display: "flex",
                                 justifyContent: "space-between",
-                                alignitems: "center",
-                                gap: "550px",
+                                alignItems: "center",
+                                marginBottom: "10px",
                               }}
                             >
                               <div
                                 style={{
+                                  flex: 1,
                                   display: "flex",
-                                  justifycontent: "flex-end",
+                                  justifyContent: "flex-start",
+                                  flexDirection: "column",
                                 }}
                               >
-                                <p>
-                                  Company:{emp?.companyName}  Position:
-                                 {emp?.position}  Start:
-                                  {emp?.startDate?.substring(0, 10)} End:
-                                  {emp?.endDate?.substring(0, 10)}
-                                </p>
+                                <p>Company:{emp?.companyName}</p>
+                                <p>Position: {emp?.position}</p>
+                                <p>Start: {emp?.startDate?.substring(0, 10)}</p>
+                                <p>End: {emp?.endDate?.substring(0, 10)}</p>
                               </div>
                               <div
                                 style={{
-                                  width: "70%",
+                                  width: "600px", // Adjust the width as needed
                                   display: "flex",
-                                  justifycontent: "flex-end",
+                                  justifyContent: "flex-end",
                                   gap: "10px",
                                 }}
                               >
@@ -526,17 +684,17 @@ const ProfileDetails = (closeConfirm) => {
                               className="right"
                               style={{
                                 display: "flex",
-                                justifyContent: "space-around",
-                                alignitems: "center",
-                                gap: "600px",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                marginBottom: "10px",
                               }}
                             >
                               <div
                                 style={{
-                                  width: "70%",
-                                  whitespace: "nowrap",
-                                  overflow: "hidden",
-                                  textoverflow: "ellipsis",
+                                  flex: 1,
+                                  display: "flex",
+                                  justifyContent: "flex-start",
+                                  flexDirection: "column",
                                 }}
                               >
                                 <p>College:{emp?.collegeName}</p>
@@ -550,9 +708,9 @@ const ProfileDetails = (closeConfirm) => {
                               </div>
                               <div
                                 style={{
-                                  width: "70%",
+                                  width: "600px", // Adjust the width as needed
                                   display: "flex",
-                                  justifycontent: "flex-end",
+                                  justifyContent: "flex-end",
                                   gap: "10px",
                                 }}
                               >
@@ -631,43 +789,34 @@ const ProfileDetails = (closeConfirm) => {
                             <div
                               style={{
                                 display: "flex",
-                                justifyContent: "space-evenly",
-                                alignitems: "center",
-                                gap: "600px",
+                                justifyContent: "space-between",
+                                alignItems: "center",
+                                marginBottom: "10px",
                               }}
                             >
                               <div
-                                style={
-                                  {
-                                    // display:"flex",
-                                    // width: "50%",
-                                    // whitespace: "nowrap",
-                                    // overflow: "hidden",
-                                    // textoverflow: "ellipsis",
-                                  }
-                                }
+                                style={{
+                                  flex: 1,
+                                  display: "flex",
+                                  justifyContent: "flex-start",
+                                  flexDirection: "column",
+                                }}
                               >
+                                <p>Project Name:{emp?.projectName}</p>
                                 <p>
-                                  {" "}
-                                  <bold>Project Name:</bold> {emp?.projectName}
-                                </p>
-
-                                <p>
-                                  Project Description: {""} {emp?.description}
+                                  Description: {""} {emp?.description}
                                 </p>
                                 <p>
-                                  {" "}
-                                  Project Url: {""}
-                                  {emp?.projectUrl}
+                                  Url: {""} {emp?.projectUrl}
                                 </p>
                               </div>
                               <div
-                              //  style={{
-                              //   width: "50%",
-                              //   display: "flex",
-                              //   justifycontent: "flex-end",
-                              //   gap: "10px",
-                              // }}
+                                style={{
+                                  width: "600px", // Adjust the width as needed
+                                  display: "flex",
+                                  justifyContent: "flex-end",
+                                  gap: "10px",
+                                }}
                               >
                                 <button
                                   className="icon-hover"
@@ -766,12 +915,29 @@ const ProfileDetails = (closeConfirm) => {
 
                 <div className="item work documents">
                   <div className="title">
-                    <h5>Attached Documents</h5>
-                    <CommonButton title="+ Add" />
+                    <h5>Attach Documents</h5>
+
+                    {/* <CommonButton title="+ Add" onClick={handleUpload} /> */}
+                    <Col className="desktop" lg={6} md={6}>
+                      <UploadProfile
+                        icon={iconResume}
+                        title="Upload Resume"
+                        description="Please upload resume of the candidate"
+                        text="Upload"
+                        onChange={handleFileChange}
+                      />
+                    </Col>
+                    {/* <input
+                        className="common-btn"
+                        type="file"
+                        accept=".pdf"
+                        onChange={handleFileChange}
+                        title="Add Resume"
+                      /> */}
                   </div>
 
                   <div className="box">
-                    <div className="left">
+                    {/* <div className="left">
                       <div className="icon">
                         <img src={iconDocument} alt="" />
                       </div>
@@ -780,14 +946,37 @@ const ProfileDetails = (closeConfirm) => {
                           <b>Resume :</b> {profileDetails?.resume} <br />
                         </h6>
                       </div>
+                    </div> */}
+                    <div className="box">
+                      <div className="left">
+                        <div className="icon">
+                          <img src={iconDocument} alt="" />
+                        </div>
+                        <div className="text">
+                          <h6>
+                            <b>Resume :</b> {selectedFile?.name} <br />
+                          </h6>
+                          <a
+                            href={selectedFile}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View PDF
+                          </a>
+                        </div>
+                      </div>
                     </div>
 
                     <div className="right">
-                      <img src={iconDowndash} alt="" />
+                      <upload
+                        src={iconDowndash}
+                        alt=""
+                        // onClick={handleDownloadResume}
+                      />
 
                       <button
                         className="icon-hover"
-                        onClick={handleDelete3}
+                        onClick={handleDeleteResume}
                         href="/"
                       >
                         <img src={IconDelete} alt="" />
@@ -801,9 +990,30 @@ const ProfileDetails = (closeConfirm) => {
                     <h5>Attached Documents</h5>
                   </div>
                   <div className="pdf"></div>
+
+                  <div className="pdf">
+                    <div className="pdf-viewer">
+                      <iframe
+                        src={selectedFile}
+                        type="application/pdf"
+                        width="100%"
+                        height="900px"
+                        seamless
+                        title="resume"
+                      />
+                    </div>
+
+                    <iframe
+                      title="PDF Viewer"
+                      src={pdfUrl}
+                      width="100%"
+                      height="500px"
+                      frameBorder="0"
+                    />
+                  </div>
                 </div>
 
-                <CommonButton title="Update" />
+                <CommonButton title="Update" onClick={handleUpload} />
               </Col>
               <Col lg={3} md={4}>
                 <Form>

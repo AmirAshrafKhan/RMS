@@ -42,7 +42,7 @@ const ProjectModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Pass the form data to the parent component
     setProjectData(formData);
     // Close the modal
@@ -96,7 +96,6 @@ const ProjectModal = ({
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {
-     
       try {
         const response = await apiBase.post(
           `profile/project-add/${profileID}`,
@@ -165,7 +164,8 @@ const ProjectModal = ({
               required
               className="form-control"
               id="exampleFormControlTextarea1"
-              rows="3"
+              as="textarea"
+              rows={4}
               placeholder=" Enter Project Description"
               onResize={false}
               name="description"

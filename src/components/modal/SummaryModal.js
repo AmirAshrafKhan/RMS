@@ -11,7 +11,7 @@ const SummaryModal = ({ isConfirm, closeConfirm }) => {
 
   const [formData, setFormData] = useState({ comment: "" });
 
-  const { comment } = formData;
+  //   const { comment } = formData;
 
   const location = useLocation();
   const { profileID } = location.state !== null && location.state;

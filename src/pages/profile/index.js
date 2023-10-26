@@ -1671,6 +1671,15 @@ const Profile = () => {
                                   <span>Current Company: </span>{" "}
                                   {val.currentCompany}
                                 </li>
+                                <li>
+                                  <span>Previous Designation: </span>{" "}
+                                  {val.previousDesignation}
+                                </li>
+                                <li>
+                                  <span>Previous Company: </span>{" "}
+                                  {val.previousCompany}
+                                </li>
+
                                 {/* <li>
                                    <span>Previous Designation: </span>
                                   {val?.experience?.map((emp) => {
@@ -1704,7 +1713,7 @@ const Profile = () => {
                               <ul>
                                 <li>
                                   <span>Current Location:</span>{" "}
-                                  {val.currentCity} 
+                                  {val.currentCity}
                                 </li>
                                 <li>
                                   <span> Preferred Location: </span>{" "}
@@ -1712,11 +1721,11 @@ const Profile = () => {
                                 </li>
 
                                 <li>
-                                  <span>Phone Number: </span> 
+                                  <span>Phone Number: </span>
                                   {val.phone}
                                 </li>
                                 <li>
-                                  <span>Email:</span> 
+                                  <span>Email:</span>
                                   {val.email}
                                 </li>
                                 <li>
@@ -1726,18 +1735,27 @@ const Profile = () => {
                                   {/* <span>I:</span>
                                   {val.industry} */}
                                 </li>
+                                <li>
+                                  <span>Industry:</span>
+                                  {val.industry}
+                                </li>
+                                <li>
+                                  <span>Qualification : </span>{" "}
+                                  {val.qualification}
+                                </li>
                               </ul>
                             </Col>
                             <ul className="ps-3">
                               <li>
-                                <span>Key Skills: {val.keySkills}</span> 
+                                <span>Key Skills: {val.keySkills}</span>
                               </li>
                             </ul>
 
                             <div className="applied">
                               <ul className="ps-3">
                                 <li>
-                                  <span>Applied on:</span> {val.appliedDate.substring(0, 10)}
+                                  <span>Applied on:</span>{" "}
+                                  {val.appliedDate.substring(0, 10)}
                                 </li>
                                 <li>|</li>
                                 <li>
@@ -1746,7 +1764,8 @@ const Profile = () => {
                                 </li>
                                 <li>|</li>
                                 <li>
-                                  <span>Modified:</span> {val.lastActive.substring(0, 10)}
+                                  <span>Modified:</span>{" "}
+                                  {val.lastActive.substring(0, 10)}
                                 </li>
                               </ul>
                             </div>
